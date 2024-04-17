@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexCaseType: {fileID: 11400000, guid: a55c1d84363b5d542a7282cf99cc4349, type: 2}
   color: {r: 0, g: 1, b: 0.0181036, a: 1}
-  spawnRate: 20
+  spawnRate: 10
+  useByVoronoi: 1

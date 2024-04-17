@@ -15,3 +15,4 @@ MonoBehaviour:
   hexCaseType: {fileID: 11400000, guid: 7cbcc98aafa9b8d4a904ecaa97c55f50, type: 2}
   color: {r: 1, g: 0.08339046, b: 0, a: 1}
   spawnRate: 1
+  useByVoronoi: 0
