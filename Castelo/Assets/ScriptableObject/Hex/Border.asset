@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 082e1060e61892f48b09eb1c7de20ebd, type: 3}
-  m_Name: Mountain
+  m_Script: {fileID: 11500000, guid: 336f14d433d77594d8ba76dcb7a77de5, type: 3}
+  m_Name: Border
   m_EditorClassIdentifier: 
-  hexCaseType: {fileID: 11400000, guid: ad7b979a200efc543bc765c19f4dfdb4, type: 2}
-  color: {r: 0.3886792, g: 0.17759071, b: 0.005133479, a: 1}
-  spawnRate: 3
-  useByVoronoi: 0
+  name: Border
+  height: 0.5
+  material: {fileID: 2100000, guid: 8f61532160f4c6f43a10821b26f05ec2, type: 2}
+  isWalkable: 0

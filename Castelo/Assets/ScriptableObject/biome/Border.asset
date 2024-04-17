@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 336f14d433d77594d8ba76dcb7a77de5, type: 3}
-  m_Name: Desert
+  m_Script: {fileID: 11500000, guid: 082e1060e61892f48b09eb1c7de20ebd, type: 3}
+  m_Name: Border
   m_EditorClassIdentifier: 
-  name: Desert
-  height: 0.8
-  material: {fileID: 2100000, guid: 6b394ce86a05590499486c8512692e8e, type: 2}
-  isWalkable: 1
+  hexCaseType: {fileID: 11400000, guid: 4a5ba651682f3b54eaa9b747f4e38a8c, type: 2}
+  color: {r: 0, g: 0.09676695, b: 1, a: 1}
+  spawnRate: 0

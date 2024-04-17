@@ -136,12 +136,13 @@ GameObject:
   - component: {fileID: 60195430}
   - component: {fileID: 60195429}
   - component: {fileID: 60195432}
+  - component: {fileID: 60195433}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &60195428
 RectTransform:
@@ -174,12 +175,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d46b231041739438ca0c582302d81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridLayout: {fileID: 149391472}
   biomeRateColorGenerator: {fileID: 60195432}
-  borderColor: {r: 0, g: 0.26598692, b: 1, a: 1}
-  showPoints: 1
+  border: {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+  showPoints: 0
   borderPerturbation: 0.515
   grid: {x: 15, y: 10}
-  gridSize: 16
+  gridSize: 10
   seed: 0
   texture: {fileID: 0}
 --- !u!114 &60195430
@@ -231,12 +233,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   biomes:
   - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
-  - {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
-  - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
-  - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
-  - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
-  - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
   - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+  - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+  - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+  - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+  - {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+  - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+--- !u!114 &60195433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60195427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e040f9ba6d16334b88e2488a6589f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postGenerationBiomes:
+  - biome: {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+    constraintBiomes:
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    allowedBiomes:
+    - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    seedNumber: 4
+    propagatePower: 3
+    smoothHexRequirement: 2
+    smoothChance: 0.1
+  - biome: {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    constraintBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    seedNumber: 3
+    propagatePower: 8
+    smoothHexRequirement: 3
+    smoothChance: 0.5
+  - biome: {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    constraintBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    seedNumber: 1
+    propagatePower: 3
+    smoothHexRequirement: 2
+    smoothChance: 0.8
+  - biome: {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    constraintBiomes:
+    - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    allowedBiomes:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    seedNumber: 1
+    propagatePower: 3
+    smoothHexRequirement: 1
+    smoothChance: 0.8
 --- !u!1 &149391469
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,8 +517,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.40611553, y: 0.00018551944, z: 0.00024394788, w: 0.91382176}
+  m_LocalPosition: {x: 614.19324, y: 308.86847, z: -63.69155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

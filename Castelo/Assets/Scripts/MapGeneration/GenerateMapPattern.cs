@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,9 @@ using UnityEngine.UI;
 
 public class GenerateMapPattern : MonoBehaviour
 {
+    public GridLayout gridLayout;
     public BiomeRateColorGenerator biomeRateColorGenerator;
-    public Color borderColor;
+    public Biome border;
     public bool showPoints = false;
 
     [Range(0, 1)] public float borderPerturbation;
@@ -16,9 +18,8 @@ public class GenerateMapPattern : MonoBehaviour
     public int seed;
     
     public Texture2D texture;
-    
-    private Color[] _possibleColors;
     private Color[,] _colors;
+    private Biome[,] _textureBiome;
     
     private RawImage _image;
     private Vector2Int[,] _pointsPosition;
@@ -28,6 +29,7 @@ public class GenerateMapPattern : MonoBehaviour
 
     private System.Random _random;
     private int _borderPerturbationNumber;
+    private Biome[,] _hexTilesPattern;
 
         // Start is called before the first frame update
     void Start()
@@ -44,6 +46,7 @@ public class GenerateMapPattern : MonoBehaviour
         };
         texture.name = "VoronoiTexture";
         GenerateVoronoi();
+        GenerateHexPattern();
     }
 
     private void GenerateVoronoi()
@@ -127,14 +130,14 @@ public class GenerateMapPattern : MonoBehaviour
             {
                 if (i == 0 || j == 0 || i == grid.y - 1 || j == grid.x -1)
                 {
-                    _colors[j, i] = borderColor;
+                    _colors[j, i] = border.color;
                 }
             }
         }
         
         while (_borderPerturbationNumber > 0)
         {
-            int selectBorder = _random.Next(0, 5);
+            int selectBorder = _random.Next(0, 4);
             int x = 0;
             int y = 0;
             
@@ -161,7 +164,7 @@ public class GenerateMapPattern : MonoBehaviour
                     break;
             }
 
-            _colors[x, y] = borderColor;
+            _colors[x, y] = border.color;
             _borderPerturbationNumber--;
         }
     }
@@ -169,5 +172,90 @@ public class GenerateMapPattern : MonoBehaviour
     private Color GetRandomColor()
     {
         return biomeRateColorGenerator.GetRandomColor(_random);
+    }
+
+    private void GenerateHexPattern()
+    {
+        Vector2Int hexCellSize = new Vector2Int(texture.width / gridLayout.gridSize.x , 
+            texture.height / gridLayout.gridSize.y);
+        int pixelPerCell = hexCellSize.x * hexCellSize.y;
+
+        _hexTilesPattern = new Biome[gridLayout.gridSize.x, gridLayout.gridSize.y];
+        
+        for (int width = 0; width < gridLayout.gridSize.x; width++)
+        {
+            for (int height = 0; height < gridLayout.gridSize.y; height++)
+            {
+                _hexTilesPattern[width, height] = GetMatchingVoronoiBiome(GetMojorityColor(
+                    width * hexCellSize.x, height * hexCellSize.y, hexCellSize, pixelPerCell));
+            }
+        }
+    }
+
+    private Color GetMojorityColor(int width, int height, Vector2 cellSize, int pixelPerCell)
+    {
+        Dictionary<Color, int> countColor = new Dictionary<Color, int>();
+        
+        for (int i = height; i < height + cellSize.y; i++)
+        {
+            for (int j = width; j < width + cellSize.x; j++)
+            {
+                Color color = texture.GetPixel(width, height);
+                if (countColor.ContainsKey(color))
+                {
+                    countColor[color] += 1;
+                }
+                else
+                {
+                    countColor.Add(color, 1);
+                }
+
+                if (countColor[color] >= pixelPerCell / 2)
+                {
+                    return color;
+                }
+            }
+        }
+
+        int max = -1;
+        Color maxColor = border.color;
+        foreach (Color color in countColor.Keys)
+        {
+            if (countColor[color] > max)
+            {
+                max = countColor[color];
+                maxColor = color;
+            }
+        }
+
+        return maxColor;
+    }
+
+    private Biome GetMatchingVoronoiBiome(Color color)
+    {
+        foreach (Biome biome in biomeRateColorGenerator.biomes)
+        {
+            if (IsSameColor(color, biome.color, 0.01f))
+            {
+                return biome;
+            }
+        }
+
+        return border;
+    }
+
+    private bool IsSameColor(Color color1, Color color2, float threshold)
+    {
+        float r = Mathf.Abs(color1.r - color2.r);
+        float g = Mathf.Abs(color1.g - color2.g);
+        float b = Mathf.Abs(color1.b - color2.b);
+        float a = Mathf.Abs(color1.a - color2.a);
+
+        return r < threshold && g < threshold && b < threshold && a < threshold;
+    }
+
+    public Biome[,] GetHexTilePatternBiomes()
+    {
+        return _hexTilesPattern;
     }
 }

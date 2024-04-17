@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082e1060e61892f48b09eb1c7de20ebd, type: 3}
-  m_Name: Desert
+  m_Name: Beach
   m_EditorClassIdentifier: 
   hexCaseType: {fileID: 11400000, guid: 621ab0a6b2316f347bb2b1a9c7201429, type: 2}
   color: {r: 1, g: 0.95055413, b: 0.111320674, a: 1}
-  spawnRate: 3
+  spawnRate: 0

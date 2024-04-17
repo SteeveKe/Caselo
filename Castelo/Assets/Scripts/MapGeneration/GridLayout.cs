@@ -9,29 +9,37 @@ public class GridLayout : MonoBehaviour
     public GenerateMapPattern generateMapPattern;
 
     [Header("Grid Settings")]
-    public Vector2 gridSize;
+    public Vector2Int gridSize;
 
     [Header("Tile Settings")] 
     public float outerSize = 1f;
     public float innerSize = 1f;
     public bool isFlatTopped;
+    
     private Dictionary<string, Mesh> _meshesDictionary;
+    private Texture2D _texture2D;
 
     // Start is called before the first frame update
     void Start()
     {
         _meshesDictionary = new Dictionary<string, Mesh>();
-        foreach (VoronoiBiome biome in generateMapPattern.biomeRateColorGenerator.biomes)
+        foreach (Biome biome in generateMapPattern.biomeRateColorGenerator.biomes)
         {
             _meshesDictionary.Add(biome.hexCaseType.name, 
                 new HexRenderer(innerSize, outerSize, biome.hexCaseType.height, isFlatTopped)._mesh);
         }
+        _meshesDictionary.Add(generateMapPattern.border.hexCaseType.name, 
+            new HexRenderer(innerSize, outerSize, generateMapPattern.border.hexCaseType.height, isFlatTopped)._mesh);
+
+        _texture2D = generateMapPattern.texture;
         LayoutGrid();
     }
 
     private void LayoutGrid()
     {
+        Biome[,] hexTilePattern = generateMapPattern.GetHexTilePatternBiomes();
         GameObject newTile = new GameObject($"Hex", typeof(HexTile));
+        
         for (int y = 0; y < gridSize.y; y++)
         {
             for (int x = 0; x < gridSize.x; x++)
@@ -41,18 +49,18 @@ public class GridLayout : MonoBehaviour
                 tile.name = $"Hex {x},{y}";
 
                 HexTile hexTile = tile.GetComponent<HexTile>();
+                Biome biome = hexTilePattern[x, y];
 
-                int index = Random.Range(0, _meshesDictionary.Count);
-                hexTile.GetComponent<MeshFilter>().mesh = 
-                    _meshesDictionary[generateMapPattern.biomeRateColorGenerator.biomes[index].name];
-
-                Vector3 pos = tile.transform.position;
-                pos.y += hexTile.GetComponent<MeshFilter>().mesh.bounds.extents.y;
-
-                tile.transform.position = pos;
-
+                MeshFilter meshFilter = hexTile.GetComponent<MeshFilter>();
+                meshFilter.mesh = 
+                    _meshesDictionary[biome.hexCaseType.name];
+                
                 hexTile.GetComponent<MeshRenderer>().material = 
-                    generateMapPattern.biomeRateColorGenerator.biomes[index].hexCaseType.material;
+                    biome.hexCaseType.material;
+               
+                Vector3 pos = tile.transform.position;
+                pos.y += meshFilter.mesh.bounds.extents.y;
+                tile.transform.position = pos;
             }
         }
         Destroy(newTile);
