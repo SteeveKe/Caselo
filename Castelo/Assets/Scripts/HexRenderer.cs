@@ -6,15 +6,15 @@ using UnityEngine.UIElements;
 
 public struct Face
 {
-    public List<Vector3> vertices { get; private set; }
-    public List<int> triangles { get; private set; }
-    public List<Vector2> uvs { get; private set; }
+    public List<Vector3> Vertices { get; private set; }
+    public List<int> Triangles { get; private set; }
+    public List<Vector2> Uvs { get; private set; }
 
     public Face(List<Vector3> vertices, List<int> triangles, List<Vector2> uvs)
     {
-        this.vertices = vertices;
-        this.triangles = triangles;
-        this.uvs = uvs;
+        this.Vertices = vertices;
+        this.Triangles = triangles;
+        this.Uvs = uvs;
     }
 }
 
@@ -81,11 +81,11 @@ public class HexRenderer
 
         for (int i = 0; i < _faces.Count; i++)
         {
-            vertices.AddRange(_faces[i].vertices);
-            uvs.AddRange(_faces[i].uvs);
+            vertices.AddRange(_faces[i].Vertices);
+            uvs.AddRange(_faces[i].Uvs);
 
             int offset = 4 * i;
-            foreach (int triangle in _faces[i].triangles)
+            foreach (int triangle in _faces[i].Triangles)
             {
                 triangles.Add(triangle + offset);
             }
@@ -118,8 +118,8 @@ public class HexRenderer
 
     protected Vector3 GetPoint(float size, float height, int index)
     {
-        float angle_deg = _isFlatTopped ? 60 * index : 60 * index - 30;
-        float angle_rad = Mathf.PI / 180f * angle_deg;
-        return new Vector3(size * Mathf.Cos(angle_rad), height, size * Mathf.Sin(angle_rad));
+        float angleDeg = _isFlatTopped ? 60 * index : 60 * index - 30;
+        float angleRad = Mathf.PI / 180f * angleDeg;
+        return new Vector3(size * Mathf.Cos(angleRad), height, size * Mathf.Sin(angleRad));
     }
 }

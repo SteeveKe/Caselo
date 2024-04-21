@@ -177,8 +177,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridLayout: {fileID: 149391472}
   biomeRateColorGenerator: {fileID: 60195432}
+  postVoronoiGeneration: {fileID: 60195433}
   border: {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
-  showPoints: 0
+  showPoints: 1
   borderPerturbation: 0.515
   grid: {x: 15, y: 10}
   gridSize: 10
@@ -256,11 +257,11 @@ MonoBehaviour:
     constraintBiomes:
     - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
     allowedBiomes:
-    - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
     - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
     - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
     seedNumber: 4
-    propagatePower: 3
+    propagateNumber: 5
+    propagatePower: 0.3
     smoothHexRequirement: 2
     smoothChance: 0.1
   - biome: {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
@@ -268,8 +269,9 @@ MonoBehaviour:
     allowedBiomes:
     - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
     - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
-    seedNumber: 3
-    propagatePower: 8
+    seedNumber: 4
+    propagateNumber: 16
+    propagatePower: 0.3
     smoothHexRequirement: 3
     smoothChance: 0.5
   - biome: {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
@@ -277,18 +279,32 @@ MonoBehaviour:
     allowedBiomes:
     - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
     seedNumber: 1
-    propagatePower: 3
+    propagateNumber: 2
+    propagatePower: 0.3
     smoothHexRequirement: 2
     smoothChance: 0.8
   - biome: {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
-    constraintBiomes:
-    - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    constraintBiomes: []
     allowedBiomes:
     - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
     seedNumber: 1
-    propagatePower: 3
+    propagateNumber: 2
+    propagatePower: 0.3
     smoothHexRequirement: 1
     smoothChance: 0.8
+  - biome: {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    constraintBiomes:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    allowedBiomes:
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    seedNumber: 4
+    propagateNumber: 1
+    propagatePower: 0.3
+    smoothHexRequirement: 1
+    smoothChance: 0.8
+  safeZoneSize: {x: 2, y: 2}
+  safeZoneBiome: {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
 --- !u!1 &149391469
 GameObject:
   m_ObjectHideFlags: 0
