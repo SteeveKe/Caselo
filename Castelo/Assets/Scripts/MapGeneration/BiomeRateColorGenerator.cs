@@ -8,11 +8,11 @@ public class BiomeRateColorGenerator : MonoBehaviour
 {
     public Biome[] biomes;
     private float _rates = 0;
-    private Color _lastColor;
+    private Biome _lastColor;
     private void Start()
     {
         GetRates();
-        _lastColor = LastBiomeColor();
+        _lastColor = LastBiome();
     }
 
     private void GetRates()
@@ -40,7 +40,7 @@ public class BiomeRateColorGenerator : MonoBehaviour
         
     }
 
-    public Color GetRandomColor(Random random)
+    public Biome GetRandomBiome(Random random)
     {
         if (biomes.Length > 0)
         {
@@ -53,27 +53,28 @@ public class BiomeRateColorGenerator : MonoBehaviour
                     rdm -= biomes[i].GetPercentage();
                     if (rdm <= 0)
                     {
-                        return biomes[i].color;
+                        return biomes[i];
                     }
                 }
             }
 
             return _lastColor;
         }
-        return Color.black;
+        Debug.Log("ERROR GetRandomBiome");
+        return null;
     }
 
-    private Color LastBiomeColor()
+    private Biome LastBiome()
     {
         for (int i = biomes.Length - 1; i > 0; i--)
         {
             if (biomes[i].useByVoronoi)
             {
-                return biomes[i].color;
+                return biomes[i];
             }
         }
-        
-        return Color.clear;
+        Debug.Log("ERROR LastBiome");
+        return null;
     }
     
 }
