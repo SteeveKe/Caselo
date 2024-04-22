@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Snow
   m_EditorClassIdentifier: 
   name: Snow
-  height: 1.2
+  height: 50
+  offSet: -30
+  offSetMultiplier: 80
   material: {fileID: 2100000, guid: 557cfac24688b4c44bcf3812a9f71156, type: 2}
   isWalkable: 1
+  scale: 20
+  octaves: 6
+  persistance: 0.5
+  lacunarity: 8

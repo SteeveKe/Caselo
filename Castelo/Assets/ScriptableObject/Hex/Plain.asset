@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Plain
   m_EditorClassIdentifier: 
   name: Plain
-  height: 1
+  height: 3
+  offSet: -1
+  offSetMultiplier: 10
   material: {fileID: 2100000, guid: 5188811e561469540a8a0a2ce5f6a74e, type: 2}
   isWalkable: 1
+  scale: 20
+  octaves: 3
+  persistance: 0.4
+  lacunarity: 1.2

@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Mountain
   m_EditorClassIdentifier: 
   name: Mountain
-  height: 2
+  height: 100
+  offSet: -50
+  offSetMultiplier: 80
   material: {fileID: 2100000, guid: 1e19392ee9d0af34fba5fa93d764d5a0, type: 2}
   isWalkable: 1
+  scale: 20
+  octaves: 4
+  persistance: 1
+  lacunarity: 1

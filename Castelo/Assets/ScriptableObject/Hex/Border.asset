@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Border
   m_EditorClassIdentifier: 
   name: Border
-  height: 0.5
+  height: 1
+  offSet: -0.3
+  offSetMultiplier: 5
   material: {fileID: 2100000, guid: 8f61532160f4c6f43a10821b26f05ec2, type: 2}
   isWalkable: 0
+  scale: 20
+  octaves: 4
+  persistance: 0.092
+  lacunarity: 1

@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GridLayout : MonoBehaviour
 {
     public GenerateMapPattern generateMapPattern;
-
+    private Perlin _perlin;
+    
     [Header("Grid Settings")]
     public Vector2Int gridSize;
 
@@ -32,6 +34,8 @@ public class GridLayout : MonoBehaviour
             new HexRenderer(innerSize, outerSize, generateMapPattern.border.hexCaseType.height, isFlatTopped)._mesh);
 
         _texture2D = generateMapPattern.texture;
+        _perlin = new Perlin();
+        _perlin.SetSeed(generateMapPattern.seed);
         LayoutGrid();
     }
 
@@ -39,7 +43,7 @@ public class GridLayout : MonoBehaviour
     {
         Biome[,] hexTilePattern = generateMapPattern.GetHexTilePatternBiomes();
         GameObject newTile = new GameObject($"Hex", typeof(HexTile));
-        
+
         for (int y = 0; y < gridSize.y; y++)
         {
             for (int x = 0; x < gridSize.x; x++)
@@ -49,23 +53,48 @@ public class GridLayout : MonoBehaviour
                 tile.name = $"Hex {x},{y}";
 
                 HexTile hexTile = tile.GetComponent<HexTile>();
-                Biome biome = hexTilePattern[x, y];
+                HexCaseType hex = hexTilePattern[x, y].hexCaseType;
 
                 MeshFilter meshFilter = hexTile.GetComponent<MeshFilter>();
                 meshFilter.mesh = 
-                    _meshesDictionary[biome.hexCaseType.name];
+                    _meshesDictionary[hex.name];
                 
                 hexTile.GetComponent<MeshRenderer>().material = 
-                    biome.hexCaseType.material;
+                    hex.material;
                
                 Vector3 pos = tile.transform.position;
-                pos.y += meshFilter.mesh.bounds.extents.y;
+                
+                float perl = GetNoiseValue(x, y, hex.scale, hex.octaves, hex.persistance, hex.lacunarity, 
+                    gridSize.x, gridSize.y);
+                pos.y += meshFilter.mesh.bounds.extents.y + hex.offSet + perl * hex.offSetMultiplier;
                 tile.transform.position = pos;
             }
         }
         Destroy(newTile);
     }
+    
+    private float GetNoiseValue(int x, int y, float scale, int octaves, float persistance, float lacunarity,
+    int width, int height)
+    {
+        float amplitude = 1;
+        float frequency = 1;
+        float noiseHeight = 0;
 
+        for (int octave = 0; octave < octaves; octave++)
+        {
+            float sampleX = x / (float)width * scale * frequency;
+            float sampleY = y / (float)height * scale * frequency;
+
+            float perlinValue = _perlin.Noise(sampleX, sampleY);
+            noiseHeight += perlinValue * amplitude;
+
+            amplitude *= persistance;
+            frequency *= lacunarity;
+        }
+
+        return noiseHeight / octaves;
+    }
+    
     public Vector3 GetPossitionForHexFromCoordinate(Vector2Int coordinate)
     {
         int column = coordinate.x;

@@ -36,8 +36,8 @@ public class PostVoronoiGeneration : MonoBehaviour
         {
             if (postGeneration.isUsed)
             {
-                //InitBiomePosition();
-                List<Vector2Int> positions = GetValidBiomePosition(postGeneration.constraintBiomes, postGeneration.allowedBiomes);
+                List<Vector2Int> positions = GetValidBiomePosition(postGeneration.notNeighboringBiomes, 
+                    postGeneration.neighboringBiomes, postGeneration.allowedBiomes);
                 PlantBiomeSeed(positions, postGeneration.seedNumber, postGeneration.propagateNumber, 
                     postGeneration.propagatePower, postGeneration.biome);
             }
@@ -269,17 +269,18 @@ public class PostVoronoiGeneration : MonoBehaviour
         }
     }
 
-    private List<Vector2Int> GetValidBiomePosition(List<Biome> constraint, List<Biome> allowed)
+    private List<Vector2Int> GetValidBiomePosition(List<Biome> notNeighbaring, List<Biome> neighboring, List<Biome> allowed)
     {
         List<Vector2Int> allowedPosition = GetAllowed(allowed);
-        return GetConstraint(constraint, allowedPosition);
+        allowedPosition = GetNeighboring(notNeighbaring, allowedPosition, false);
+        return GetNeighboring(neighboring, allowedPosition, true);
     }
 
-    private List<Vector2Int> GetConstraint(List<Biome> constraint, List<Vector2Int> allowedPosition)
+    private List<Vector2Int> GetNeighboring(List<Biome> neighboring, List<Vector2Int> allowedPosition, bool allow)
     {
         List<Vector2Int> validPosition = new List<Vector2Int>();
 
-        if (constraint.Count == 0)
+        if (neighboring.Count == 0)
         {
             return allowedPosition;
         }
@@ -287,7 +288,7 @@ public class PostVoronoiGeneration : MonoBehaviour
         {
             foreach (Vector2Int position in allowedPosition)
             {
-                if (IsConstraintPosValid(position, constraint))
+                if (IsNeighboringPosValid(position, neighboring, allow))
                 {
                     validPosition.Add(position);
                 }
@@ -297,7 +298,7 @@ public class PostVoronoiGeneration : MonoBehaviour
         return validPosition;
     }
 
-    private bool IsConstraintPosValid(Vector2Int position, List<Biome> constraint)
+    private bool IsNeighboringPosValid(Vector2Int position, List<Biome> neighboring, bool allow)
     {
         for (int height = position.y - 1; height < position.y + 2; height++)
         {
@@ -314,22 +315,32 @@ public class PostVoronoiGeneration : MonoBehaviour
                     continue;
                 }
 
-                if ((height == position.y - 1 && width == position.x - 1) ||
-                    (height == position.y - 1 && width == position.x + 1) ||
-                    (height == position.y + 1 && width == position.x - 1) ||
-                    (height == position.y + 1 && width == position.x + 1) )
+                if (allow)
                 {
-                    continue;
-                }
+                    if ((height == position.y - 1 && width == position.x - 1) ||
+                        (height == position.y - 1 && width == position.x + 1) ||
+                        (height == position.y + 1 && width == position.x - 1) ||
+                        (height == position.y + 1 && width == position.x + 1) )
+                    {
+                        continue;
+                    }
 
-                if (constraint.Contains(_textureBiome[width, height]))
+                    if (neighboring.Contains(_textureBiome[width, height]))
+                    {
+                        return true;
+                    }
+                }
+                else
                 {
-                    return true;
+                    if (neighboring.Contains(_textureBiome[width, height]))
+                    {
+                        return false;
+                    }
                 }
             }
         }
 
-        return false;
+        return !allow;
     }
 
     private List<Vector2Int> GetAllowed(List<Biome> allowed)

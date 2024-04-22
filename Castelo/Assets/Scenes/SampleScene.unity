@@ -254,7 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postGenerationBiomes:
   - biome: {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
-    constraintBiomes:
+    notNeighboringBiomes: []
+    neighboringBiomes:
     - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
     allowedBiomes:
     - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
@@ -264,8 +265,10 @@ MonoBehaviour:
     propagatePower: 0.3
     smoothHexRequirement: 2
     smoothChance: 0.1
+    isUsed: 1
   - biome: {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
-    constraintBiomes: []
+    notNeighboringBiomes: []
+    neighboringBiomes: []
     allowedBiomes:
     - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
     - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
@@ -274,8 +277,11 @@ MonoBehaviour:
     propagatePower: 0.3
     smoothHexRequirement: 3
     smoothChance: 0.5
+    isUsed: 1
   - biome: {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
-    constraintBiomes: []
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+    neighboringBiomes: []
     allowedBiomes:
     - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
     seedNumber: 1
@@ -283,8 +289,11 @@ MonoBehaviour:
     propagatePower: 0.3
     smoothHexRequirement: 2
     smoothChance: 0.8
+    isUsed: 1
   - biome: {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
-    constraintBiomes: []
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    neighboringBiomes: []
     allowedBiomes:
     - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
     seedNumber: 1
@@ -292,9 +301,12 @@ MonoBehaviour:
     propagatePower: 0.3
     smoothHexRequirement: 1
     smoothChance: 0.8
+    isUsed: 1
   - biome: {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
-    constraintBiomes:
-    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    neighboringBiomes: []
     allowedBiomes:
     - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
     - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
@@ -303,6 +315,7 @@ MonoBehaviour:
     propagatePower: 0.3
     smoothHexRequirement: 1
     smoothChance: 0.8
+    isUsed: 1
   safeZoneSize: {x: 2, y: 2}
   safeZoneBiome: {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
 --- !u!1 &149391469
