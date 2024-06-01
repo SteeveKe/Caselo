@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 public class GridLayout : MonoBehaviour
 {
     public GenerateMapPattern generateMapPattern;
+    private SmoothHeight _smoothHeight;
     private Perlin _perlin;
     
     [Header("Grid Settings")]
@@ -20,10 +21,16 @@ public class GridLayout : MonoBehaviour
     
     private Dictionary<string, Mesh> _meshesDictionary;
     private Texture2D _texture2D;
+    private float[,] _heightMap;
+    private Mesh[,] _hexMesh;
+    private Transform[,] _hexPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        _smoothHeight = FindObjectOfType<SmoothHeight>();
+        generateMapPattern.GeneratePattern();
+        
         _meshesDictionary = new Dictionary<string, Mesh>();
         foreach (Biome biome in generateMapPattern.biomeRateColorGenerator.biomes)
         {
@@ -42,6 +49,10 @@ public class GridLayout : MonoBehaviour
     private void LayoutGrid()
     {
         Biome[,] hexTilePattern = generateMapPattern.GetHexTilePatternBiomes();
+        _heightMap = new float[gridSize.x, gridSize.y];
+        _hexMesh = new Mesh[gridSize.x, gridSize.y];
+        _hexPos = new Transform[gridSize.x, gridSize.y];
+        
         GameObject newTile = new GameObject($"Hex", typeof(HexTile));
 
         for (int y = 0; y < gridSize.y; y++)
@@ -68,9 +79,28 @@ public class GridLayout : MonoBehaviour
                     gridSize.x, gridSize.y);
                 pos.y += meshFilter.mesh.bounds.extents.y + hex.offSet + perl * hex.offSetMultiplier;
                 tile.transform.position = pos;
+                _heightMap[x, y] = pos.y + meshFilter.mesh.bounds.extents.y;
+                _hexMesh[x, y] = meshFilter.mesh;
+                _hexPos[x, y] = tile.transform;
             }
         }
         Destroy(newTile);
+        _smoothHeight.SetNewHexHeight();
+    }
+
+    public float[,] GetHeightMap()
+    {
+        return _heightMap;
+    }
+    
+    public Mesh[,] GetHexMeshes()
+    {
+        return _hexMesh;
+    }
+    
+    public Transform[,] GetHexTransform()
+    {
+        return _hexPos;
     }
     
     private float GetNoiseValue(int x, int y, float scale, int octaves, float persistance, float lacunarity,

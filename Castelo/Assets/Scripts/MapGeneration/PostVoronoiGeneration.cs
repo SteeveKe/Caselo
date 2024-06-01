@@ -10,7 +10,7 @@ public class PostVoronoiGeneration : MonoBehaviour
     public List<PostGenerationBiome> postGenerationBiomes;
     public Vector2Int safeZoneSize;
     public Biome safeZoneBiome;
-    
+
     //_textureBiomeColor to change
     private Biome[,] _textureBiome;
     private GenerateMapPattern _generateMapPattern;
@@ -20,7 +20,7 @@ public class PostVoronoiGeneration : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     public void GeneratePostBiome()
@@ -30,31 +30,31 @@ public class PostVoronoiGeneration : MonoBehaviour
         _random = _generateMapPattern.GetRandom();
         GenerateSafeZone();
         InitBiomePosition();
-        
+
 
         foreach (PostGenerationBiome postGeneration in postGenerationBiomes)
         {
             if (postGeneration.isUsed)
             {
-                List<Vector2Int> positions = GetValidBiomePosition(postGeneration.notNeighboringBiomes, 
+                List<Vector2Int> positions = GetValidBiomePosition(postGeneration.notNeighboringBiomes,
                     postGeneration.neighboringBiomes, postGeneration.allowedBiomes);
-                PlantBiomeSeed(positions, postGeneration.seedNumber, postGeneration.propagateNumber, 
+                PlantBiomeSeed(positions, postGeneration.seedNumber, postGeneration.propagateNumber,
                     postGeneration.propagatePower, postGeneration.biome);
             }
         }
     }
 
-    private void PlantBiomeSeed(List<Vector2Int> allowedPositions, int seedNumber, int propagateNumber, 
+    private void PlantBiomeSeed(List<Vector2Int> allowedPositions, int seedNumber, int propagateNumber,
         float propagatePower, Biome biome)
     {
         List<Vector2Int> positions = new List<Vector2Int>();
-        
+
         for (int i = 0; i < seedNumber; i++)
         {
             if (allowedPositions.Count != 0)
             {
                 Vector2Int pos = allowedPositions[_random.Next(0, allowedPositions.Count)];
-                
+
                 while (positions.Count < allowedPositions.Count && positions.Contains(pos))
                 {
                     pos = allowedPositions[_random.Next(0, allowedPositions.Count)];
@@ -85,7 +85,7 @@ public class PostVoronoiGeneration : MonoBehaviour
         }
     }
 
-    private void PropagateBiome(List<Vector2Int> allowedPositions, List<Vector2Int> positions, 
+    private void PropagateBiome(List<Vector2Int> allowedPositions, List<Vector2Int> positions,
         int propagateNumber, float propagatePower, Biome biome)
     {
         foreach (Vector2Int pos in positions)
@@ -98,15 +98,16 @@ public class PostVoronoiGeneration : MonoBehaviour
                 Debug.Log("Propagate position not exist");
             }
         }
-        
+
         if (propagateNumber > 0)
         {
             List<Vector2Int> adjacent = GetAllAdjacent(positions, allowedPositions);
-            
+
             if (adjacent.Count > 0)
             {
                 List<Vector2Int> newPositions = GetRandomPossitions(adjacent, propagateNumber, propagatePower);
-                PropagateBiome(allowedPositions, newPositions, propagateNumber - newPositions.Count, propagatePower, biome);
+                PropagateBiome(allowedPositions, newPositions, propagateNumber - newPositions.Count, propagatePower,
+                    biome);
             }
             else
             {
@@ -130,7 +131,7 @@ public class PostVoronoiGeneration : MonoBehaviour
     private List<Vector2Int> GetAllAdjacent(List<Vector2Int> positions, List<Vector2Int> allowedPositions)
     {
         List<Vector2Int> adjacent = new List<Vector2Int>();
-        
+
         foreach (Vector2Int pos in positions)
         {
             List<Vector2Int> adj = GetValidAjacentPosition(pos, allowedPositions);
@@ -149,7 +150,7 @@ public class PostVoronoiGeneration : MonoBehaviour
     private List<Vector2Int> GetRandomPossitions(List<Vector2Int> adjacent, int propagateNumber, float propagatePower)
     {
         List<Vector2Int> randomPositions = new List<Vector2Int>();
-        
+
         while (randomPositions.Count == 0)
         {
             for (int i = 0; i < adjacent.Count; i++)
@@ -158,7 +159,7 @@ public class PostVoronoiGeneration : MonoBehaviour
                 {
                     break;
                 }
-                        
+
                 Vector2Int pos = adjacent[_random.Next(0, adjacent.Count)];
                 if (propagatePower - _random.Next(0, 1) >= 0)
                 {
@@ -182,18 +183,20 @@ public class PostVoronoiGeneration : MonoBehaviour
                 return;
             }
         }
+
         Debug.Log("position not removed from dictionary");
     }
 
     private List<Vector2Int> GetValidAjacentPosition(Vector2Int position, List<Vector2Int> allowedPositions)
     {
         List<Vector2Int> adjacent = new List<Vector2Int>();
-        
+
         for (int height = position.y - 1; height < position.y + 2; height++)
         {
             for (int width = position.x - 1; width < position.x + 2; width++)
             {
-                if (height < 0 || width < 0 || 
+
+                if (height < 0 || width < 0 ||
                     height >= _textureBiome.GetLength(1) || width >= _textureBiome.GetLength(0))
                 {
                     continue;
@@ -207,7 +210,7 @@ public class PostVoronoiGeneration : MonoBehaviour
                 if ((height == position.y - 1 && width == position.x - 1) ||
                     (height == position.y - 1 && width == position.x + 1) ||
                     (height == position.y + 1 && width == position.x - 1) ||
-                    (height == position.y + 1 && width == position.x + 1) )
+                    (height == position.y + 1 && width == position.x + 1))
                 {
                     continue;
                 }
@@ -226,10 +229,10 @@ public class PostVoronoiGeneration : MonoBehaviour
     private void GenerateSafeZone()
     {
         _safeZonePosition = new List<Vector2Int>();
-        
+
         int width = _textureBiome.GetLength(0);
         int height = _textureBiome.GetLength(1);
-        
+
         for (int i = height / 2 - safeZoneSize.y / 2; i < height / 2 + safeZoneSize.y / 2 + safeZoneSize.y % 2; i++)
         {
             for (int j = width / 2 - safeZoneSize.x / 2; j < width / 2 + safeZoneSize.x / 2 + safeZoneSize.x % 2; j++)
@@ -269,7 +272,8 @@ public class PostVoronoiGeneration : MonoBehaviour
         }
     }
 
-    private List<Vector2Int> GetValidBiomePosition(List<Biome> notNeighbaring, List<Biome> neighboring, List<Biome> allowed)
+    private List<Vector2Int> GetValidBiomePosition(List<Biome> notNeighbaring, List<Biome> neighboring,
+        List<Biome> allowed)
     {
         List<Vector2Int> allowedPosition = GetAllowed(allowed);
         allowedPosition = GetNeighboring(notNeighbaring, allowedPosition, false);
@@ -304,7 +308,7 @@ public class PostVoronoiGeneration : MonoBehaviour
         {
             for (int width = position.x - 1; width < position.x + 2; width++)
             {
-                if (height < 0 || width < 0 || 
+                if (height < 0 || width < 0 ||
                     height >= _textureBiome.GetLength(1) || width >= _textureBiome.GetLength(0))
                 {
                     continue;
@@ -320,7 +324,7 @@ public class PostVoronoiGeneration : MonoBehaviour
                     if ((height == position.y - 1 && width == position.x - 1) ||
                         (height == position.y - 1 && width == position.x + 1) ||
                         (height == position.y + 1 && width == position.x - 1) ||
-                        (height == position.y + 1 && width == position.x + 1) )
+                        (height == position.y + 1 && width == position.x + 1))
                     {
                         continue;
                     }
@@ -365,7 +369,6 @@ public class PostVoronoiGeneration : MonoBehaviour
                 }
             }
         }
-
         return validPosition;
     }
 

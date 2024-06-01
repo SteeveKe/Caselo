@@ -13,7 +13,5 @@ public class PostGenerationBiome
     public int seedNumber = 1;
     public int propagateNumber = 3;
     [Range(0, 1)] public float propagatePower = 0.3f;
-    [Range(0, 6)]public int smoothHexRequirement;
-    [Range(0, 1)] public float smoothChance;
     public bool isUsed = true;
 }
