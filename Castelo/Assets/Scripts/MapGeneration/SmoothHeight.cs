@@ -11,18 +11,6 @@ public class SmoothHeight : MonoBehaviour
     private bool[,] _hexMapNewBorder;
     private Dictionary<Biome, List<Vector2Int>> _biomePosition;
     private float[,] _heightMap;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void SetNewHexHeight()
     {
@@ -230,8 +218,6 @@ public class SmoothHeight : MonoBehaviour
                 biomeBorder.Add(pos);
             }
         }
-        
-        //don't forget to remove from dictionary
 
         return biomeBorder;
     }
@@ -254,7 +240,6 @@ public class SmoothHeight : MonoBehaviour
                     continue;
                 }
 
-                //maybe error here
                 if ((height == position.y - 1 && width == position.x - 1) ||
                     (height == position.y + 1 && width == position.x - 1))
                 {

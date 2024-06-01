@@ -8,9 +8,4 @@ using UnityEngine.UI;
 [RequireComponent(typeof(MeshRenderer))]
 public class HexTile : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

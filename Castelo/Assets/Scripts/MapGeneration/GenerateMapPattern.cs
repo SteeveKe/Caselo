@@ -11,7 +11,6 @@ public class GenerateMapPattern : MonoBehaviour
     public GridLayout gridLayout;
     public BiomeRateColorGenerator biomeRateColorGenerator;
     public PostVoronoiGeneration postVoronoiGeneration;
-    public SmoothHeight smoothHeight;
     public Biome border;
     public bool showPoints = false;
 
@@ -21,7 +20,6 @@ public class GenerateMapPattern : MonoBehaviour
     public int seed;
     
     public Texture2D texture;
-    //private Color[,] _colors;
     private Biome[,] _textureBiomeColor;
     private Biome[,] _textureColorToBiome;
     
@@ -43,12 +41,6 @@ public class GenerateMapPattern : MonoBehaviour
     public Biome[,] GetTextureBiomeColor()
     {
         return _textureBiomeColor;
-    }
-    
-        // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void GeneratePattern()
@@ -214,10 +206,6 @@ public class GenerateMapPattern : MonoBehaviour
             {
                 _hexTilesPattern[width, height] = GetMojorityBiome(
                     width * hexCellSize.x, height * hexCellSize.y, hexCellSize, pixelPerCell);
-                /*
-                _hexTilesPattern[width, height] = GetMatchingVoronoiBiome(GetMojorityBiome(
-                    width * hexCellSize.x, height * hexCellSize.y, hexCellSize, pixelPerCell));
-                    */
             }
         }
     }
@@ -230,7 +218,6 @@ public class GenerateMapPattern : MonoBehaviour
         {
             for (int j = width; j < width + cellSize.x; j++)
             {
-                //Color color = texture.GetPixel(width, height);
                 Biome biome = _textureColorToBiome[width, height];
                 if (countBiome.ContainsKey(biome))
                 {
@@ -261,31 +248,6 @@ public class GenerateMapPattern : MonoBehaviour
 
         return maxBiome;
     }
-
-    /*
-    private Biome GetMatchingVoronoiBiome(Color color)
-    {
-        foreach (Biome biome in biomeRateColorGenerator.biomes)
-        {
-            if (IsSameColor(color, biome.color, 0.01f))
-            {
-                return biome;
-            }
-        }
-
-        return border;
-    }
-
-    private bool IsSameColor(Color color1, Color color2, float threshold)
-    {
-        float r = Mathf.Abs(color1.r - color2.r);
-        float g = Mathf.Abs(color1.g - color2.g);
-        float b = Mathf.Abs(color1.b - color2.b);
-        float a = Mathf.Abs(color1.a - color2.a);
-
-        return r < threshold && g < threshold && b < threshold && a < threshold;
-    }
-    */
 
     public Biome[,] GetHexTilePatternBiomes()
     {
