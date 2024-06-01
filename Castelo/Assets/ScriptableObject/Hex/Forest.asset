@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   name: Forest
-  height: 1.1
+  height: 20
+  offSet: -10
+  offSetMultiplier: 40
   material: {fileID: 2100000, guid: 2879fd95c3072a14d94d43c66ca8cc17, type: 2}
   isWalkable: 1
+  scale: 20
+  octaves: 3
+  persistance: 0.211
+  lacunarity: 1

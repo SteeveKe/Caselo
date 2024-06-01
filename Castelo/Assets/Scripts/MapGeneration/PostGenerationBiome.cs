@@ -7,12 +7,11 @@ using UnityEngine.Serialization;
 public class PostGenerationBiome
 {
     public Biome biome;
-    public List<Biome> constraintBiomes = new List<Biome>();
+    public List<Biome> notNeighboringBiomes = new List<Biome>();
+    public List<Biome> neighboringBiomes = new List<Biome>();
     public List<Biome> allowedBiomes = new List<Biome>();
     public int seedNumber = 1;
     public int propagateNumber = 3;
     [Range(0, 1)] public float propagatePower = 0.3f;
-    [Range(0, 6)]public int smoothHexRequirement;
-    [Range(0, 1)] public float smoothChance;
     public bool isUsed = true;
 }

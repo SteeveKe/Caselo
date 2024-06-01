@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Volcano
   m_EditorClassIdentifier: 
   name: Volcano
-  height: 3
+  height: 1
+  offSet: -1
+  offSetMultiplier: 2
   material: {fileID: 2100000, guid: 102c8db7b0d4cdb4594a6cff330571dd, type: 2}
   isWalkable: 0
+  scale: 50
+  octaves: 4
+  persistance: 1
+  lacunarity: 5

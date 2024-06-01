@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Water
   m_EditorClassIdentifier: 
   name: Water
-  height: 0.7
+  height: 1
+  offSet: -0.1
+  offSetMultiplier: 1
   material: {fileID: 2100000, guid: b8049531e7f3b624b843bb9d12f8bb34, type: 2}
   isWalkable: 0
+  scale: 50
+  octaves: 3
+  persistance: 1
+  lacunarity: 5

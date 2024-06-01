@@ -11,6 +11,7 @@ public class GenerateMapPattern : MonoBehaviour
     public GridLayout gridLayout;
     public BiomeRateColorGenerator biomeRateColorGenerator;
     public PostVoronoiGeneration postVoronoiGeneration;
+    public SmoothHeight smoothHeight;
     public Biome border;
     public bool showPoints = false;
 
@@ -47,8 +48,13 @@ public class GenerateMapPattern : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void GeneratePattern()
+    {
         _borderPerturbationNumber = (int)((grid.x + grid.y) * borderPerturbation);
-        _random = new System.Random(seed);
+        _random = new Random(seed);
         _witdh = grid.x * gridSize;
         _height = grid.y * gridSize;
         _image = GetComponent<RawImage>();
@@ -118,6 +124,8 @@ public class GenerateMapPattern : MonoBehaviour
         
         texture.Apply();
         _image.texture = texture;
+        
+        //smoothHeight.SmoothBiomeHeight();
         
         System.IO.File.WriteAllBytes("VoronoiDiagram.png", texture.EncodeToPNG());
     }
