@@ -1,24 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "New Biome", menuName = "Biome")]
-public class Biome : ScriptableObject
+namespace ScriptableObject
 {
-    public HexCaseType hexCaseType;
-    public Color color;
-    public float spawnRate = 1;
-    public bool useByVoronoi = false;
-    private int _percentage;
-
-    public void SetPercentage(int percent)
+    [CreateAssetMenu(fileName = "New Biome", menuName = "Biome")]
+    public class Biome : UnityEngine.ScriptableObject
     {
-        _percentage = percent;
-    }
+        public HexCaseType hexCaseType;
+        public Color color;
+        public float spawnRate = 1;
+        public bool useByVoronoi = false;
+        private int _percentage;
 
-    public int GetPercentage()
-    {
-        return _percentage;
+        public void SetPercentage(int percent)
+        {
+            _percentage = percent;
+        }
+
+        public int GetPercentage()
+        {
+            return _percentage;
+        }
     }
 }

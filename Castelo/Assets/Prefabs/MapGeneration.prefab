@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1212318693639595870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -231,6 +231,210 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08fc732b0c4fcc4c9ca5fd0c2613e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSize: {x: 150, y: 100}
+  outerSize: 5
+  innerSize: 0
+  isFlatTopped: 0
+  tileHandler: {fileID: 0}
+  borderBiome: {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+  showPoint: 1
+  borderPerturbation: 0.515
+  patternGrid: {x: 15, y: 10}
+  patternGridSize: 10
+  mapSeed: 1
+  rawImage: {fileID: 5095193561145491882}
+  biomes:
+  - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+  - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+  - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+  - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+  - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+  - {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+  - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+  postGenerationBiomes:
+  - biome: {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+    notNeighboringBiomes: []
+    neighboringBiomes:
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    allowedBiomes:
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    seedNumber: 4
+    propagateNumber: 5
+    propagatePower: 0.3
+    isUsed: 1
+  - biome: {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    notNeighboringBiomes: []
+    neighboringBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    seedNumber: 4
+    propagateNumber: 16
+    propagatePower: 0.3
+    isUsed: 1
+  - biome: {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+    neighboringBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    seedNumber: 1
+    propagateNumber: 2
+    propagatePower: 0.3
+    isUsed: 1
+  - biome: {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    neighboringBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    seedNumber: 1
+    propagateNumber: 2
+    propagatePower: 0.3
+    isUsed: 1
+  - biome: {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    notNeighboringBiomes:
+    - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    neighboringBiomes: []
+    allowedBiomes:
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    seedNumber: 4
+    propagateNumber: 1
+    propagatePower: 0.3
+    isUsed: 1
+  safeZoneSize: {x: 2, y: 2}
+  safeZoneBiome: {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+  biomeHeights:
+  - biome: {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    notAffectedBiome: []
+    lowerBiome: []
+    layerNumber: 3
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.3032837
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - biome: {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    notAffectedBiome:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    lowerBiome: []
+    layerNumber: 8
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0.0016860962
+        value: 0.20184326
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - biome: {fileID: 11400000, guid: a2cca112200ec4949bc7007e4415542f, type: 2}
+    notAffectedBiome:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    - {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    - {fileID: 11400000, guid: 1978dd8bf51fe854b96016409cf2cddf, type: 2}
+    - {fileID: 11400000, guid: 10399c6059b5c7746b02fc5ca5987c0a, type: 2}
+    lowerBiome:
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    layerNumber: 3
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - biome: {fileID: 11400000, guid: 7df49cfce34e1b7449185082565e81f9, type: 2}
+    notAffectedBiome:
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    - {fileID: 11400000, guid: a425eba36954b2a419849a63c167dec9, type: 2}
+    lowerBiome:
+    - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
+    - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
+    - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
+    layerNumber: 3
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
 --- !u!114 &3481993517031414596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,11 +447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372174dfe521b2d4d8056ea4c28bd9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generateMapPattern: {fileID: 0}
-  gridSize: {x: 0, y: 0}
-  outerSize: 1
-  innerSize: 1
-  isFlatTopped: 0
 --- !u!114 &326670507682102051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,16 +459,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d46b231041739438ca0c582302d81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridLayout: {fileID: 0}
-  biomeRateColorGenerator: {fileID: 0}
-  postVoronoiGeneration: {fileID: 0}
-  border: {fileID: 0}
-  showPoints: 0
-  borderPerturbation: 0
-  grid: {x: 0, y: 0}
-  gridSize: 0
-  seed: 0
-  texture: {fileID: 0}
 --- !u!114 &3800809548253092109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa2f27049c28ec478b4411a9ae53c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomes: []
 --- !u!114 &5064747022496257692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,9 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e040f9ba6d16334b88e2488a6589f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  postGenerationBiomes: []
-  safeZoneSize: {x: 0, y: 0}
-  safeZoneBiome: {fileID: 0}
 --- !u!114 &8964545362033478067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8c0250cb56090468816e54bc4dfe8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biomeHeights: []
 --- !u!1 &6766537897115911223
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4752260186507693831
 RectTransform:
   m_ObjectHideFlags: 0
