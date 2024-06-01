@@ -225,10 +225,6 @@ public class SmoothHeight : MonoBehaviour
         List<Vector2Int> biomeBorder = new List<Vector2Int>();
         foreach (Vector2Int pos in _biomePosition[biome])
         {
-            if (pos.x == 25 && pos.y == 53)
-            {
-                int tets = 1;
-            }
             if (IsBiomeBorder(biome, pos, notAffectedBiomes))
             {
                 biomeBorder.Add(pos);
