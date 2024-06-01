@@ -9,7 +9,7 @@ public class BiomeRateColorGenerator : MonoBehaviour
     public Biome[] biomes;
     private float _rates = 0;
     private Biome _lastColor;
-    private void Start()
+    public void InitColor()
     {
         GetRates();
         _lastColor = LastBiome();

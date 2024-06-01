@@ -116,9 +116,6 @@ public class GenerateMapPattern : MonoBehaviour
         
         texture.Apply();
         _image.texture = texture;
-        
-        //smoothHeight.SmoothBiomeHeight();
-        
         System.IO.File.WriteAllBytes("VoronoiDiagram.png", texture.EncodeToPNG());
     }
 
@@ -126,6 +123,7 @@ public class GenerateMapPattern : MonoBehaviour
     {
         _pointsPosition = new Vector2Int[grid.x, grid.y];
         _textureBiomeColor = new Biome[grid.x, grid.y];
+        biomeRateColorGenerator.InitColor();
         
         for (int i = 0; i < grid.y; i++)
         {

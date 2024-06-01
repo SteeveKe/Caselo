@@ -10,18 +10,12 @@ public class PostVoronoiGeneration : MonoBehaviour
     public List<PostGenerationBiome> postGenerationBiomes;
     public Vector2Int safeZoneSize;
     public Biome safeZoneBiome;
-
-    //_textureBiomeColor to change
+    
     private Biome[,] _textureBiome;
     private GenerateMapPattern _generateMapPattern;
     private Dictionary<Biome, List<Vector2Int>> _biomePosition;
     private List<Vector2Int> _safeZonePosition;
     private Random _random;
-
-    private void Start()
-    {
-
-    }
 
     public void GeneratePostBiome()
     {

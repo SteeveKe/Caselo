@@ -510,6 +510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGeneration
       objectReference: {fileID: 0}
+    - target: {fileID: 3401690864460108942, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7733615698767596430, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -869,7 +873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1293883156
 MonoBehaviour:
   m_ObjectHideFlags: 0

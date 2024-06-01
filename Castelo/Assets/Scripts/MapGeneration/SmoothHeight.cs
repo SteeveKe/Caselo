@@ -147,7 +147,7 @@ public class SmoothHeight : MonoBehaviour
             }
         }
 
-        float averageHeight = 0;
+        float averageHeight;
 
         if (number != 0)
         {
