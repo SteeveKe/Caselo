@@ -43,6 +43,7 @@ namespace MapGeneration
         private void SmoothBiomeHeight()
         {
             GetAllPossibleBorder();
+            _hexMapNewBorder = new bool[_hexMapBiomes.GetLength(0), _hexMapBiomes.GetLength(1)];
         
             foreach (BiomeHeight biomeHeight in _biomeHeights)
             {
@@ -54,8 +55,6 @@ namespace MapGeneration
 
         private void ResetHexMapNewBorder()
         {
-            _hexMapNewBorder = new bool[_hexMapBiomes.GetLength(0), _hexMapBiomes.GetLength(1)];
-        
             for (int height = 0; height < _hexMapNewBorder.GetLength(1); height++)
             {
                 for (int width = 0; width < _hexMapNewBorder.GetLength(0); width++)

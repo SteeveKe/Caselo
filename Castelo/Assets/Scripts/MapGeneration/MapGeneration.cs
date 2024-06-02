@@ -21,32 +21,36 @@ namespace MapGeneration
         private SmoothHeight _smoothHeight;
         
         private Random _random;
-
-        [Header("GridLayout")] 
-        public Vector2Int gridSize;
+        private Vector2Int _patternGrid;
+        
+        [Header("HexTileInfo")]
         public float outerSize;
         public float innerSize;
         public bool isFlatTopped;
-        public Transform tileHandler;
 
-        [Header("GenerateMapPattern")] 
-        public Biome borderBiome;
-        public bool showPoint = false;
-        [Range(0, 1)] public float borderPerturbation;
-        public Vector2Int patternGrid;
-        public int patternGridSize;
+        [Header("HexGridInfo")] 
+        public Vector2Int gridSize;
+        public Transform tileHandler;
         public int mapSeed;
-        public RawImage rawImage;
+        [Range(0, 1)] public float borderPerturbation;
         
-        [Header("BiomeRateColorGenerator")]
+        [Header("BiomeInfo")] 
+        public Biome borderBiome;
         public Biome[] biomes;
         
-        [Header("PostVoronoiGeneration")]
-        public List<PostGenerationBiome> postGenerationBiomes;
+        [Header("SpawnArea")]
         public Vector2Int safeZoneSize;
         public Biome safeZoneBiome;
+
+        [Header("Voronoi")] 
+        public bool showImage = false;
+        public bool showImagePoint = false;
+        public bool saveImage = false;
+        public int patternGridSize;
+        public RawImage rawImage;
         
-        [Header("SmoothHeight")]
+        [Header("PostGeneration")]
+        public List<PostGenerationBiome> postGenerationBiomes;
         public List<BiomeHeight> biomeHeights;
 
         public GridLayout GridLayout => _gridLayout;
@@ -61,16 +65,18 @@ namespace MapGeneration
 
         public Random GetRandom => _random;
 
+        public Vector2Int PatternGrid => _patternGrid;
+
         void Start()
         {
+            _patternGrid = new Vector2Int(gridSize.x / 10, gridSize.y / 10);
             _random = new Random(mapSeed);
             _gridLayout = GetComponent<GridLayout>();
             _generateMapPattern = GetComponent<GenerateMapPattern>();
             _biomeRateColorGenerator = GetComponent<BiomeRateColorGenerator>();
             _postVoronoiGeneration = GetComponent<PostVoronoiGeneration>();
             _smoothHeight = GetComponent<SmoothHeight>();
-        
-        
+            
             _gridLayout.InitGridLayout();
         }
     }
