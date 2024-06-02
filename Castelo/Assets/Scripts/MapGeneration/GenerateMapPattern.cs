@@ -49,8 +49,8 @@ namespace MapGeneration
             _biomeRateColorGenerator = _mapGeneration.BiomeRateColorGenerator;
             _postVoronoiGeneration = _mapGeneration.PostVoronoiGeneration;
             _border = _mapGeneration.borderBiome;
-            _showPoints = _mapGeneration.showPoint;
-            _grid = _mapGeneration.patternGrid;
+            _showPoints = _mapGeneration.showImagePoint;
+            _grid = _mapGeneration.PatternGrid;
             _gridSize = _mapGeneration.patternGridSize;
 
             _borderPerturbation = _mapGeneration.borderPerturbation;
@@ -65,6 +65,7 @@ namespace MapGeneration
                 filterMode = FilterMode.Point
             };
             _texture.name = "VoronoiTexture";
+            _mapGeneration.rawImage.gameObject.SetActive(_mapGeneration.showImage);
             GenerateVoronoi();
             GenerateHexPattern();
         }
@@ -125,7 +126,10 @@ namespace MapGeneration
         
             _texture.Apply();
             _image.texture = _texture;
-            System.IO.File.WriteAllBytes("VoronoiDiagram.png", _texture.EncodeToPNG());
+            if (_mapGeneration.saveImage)
+            {
+                System.IO.File.WriteAllBytes("VoronoiDiagram.png", _texture.EncodeToPNG());
+            }
         }
 
         private void GeneratePoints()

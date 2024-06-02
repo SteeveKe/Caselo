@@ -135,6 +135,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGeneration
       objectReference: {fileID: 0}
+    - target: {fileID: 5304757324399474905, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: mapSeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304757324399474905, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: gridSize.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304757324399474905, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: gridSize.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304757324399474905, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: isFlatTopped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304757324399474905, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: patternGrid.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7733615698767596430, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -173,6 +193,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7733615698767596430, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8902270236538044510, guid: 0c998decf2e842a4e8e1b069eb9c9b14, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
