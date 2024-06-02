@@ -235,7 +235,7 @@ MonoBehaviour:
   outerSize: 5
   innerSize: 0
   isFlatTopped: 0
-  tileHandler: {fileID: 0}
+  tileHandler: {fileID: 4180681609532727749}
   borderBiome: {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
   showPoint: 1
   borderPerturbation: 0.515
@@ -410,27 +410,45 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7fb47f789c10787449ba01fa969bdfba, type: 2}
     - {fileID: 11400000, guid: d2021d4034a7a0541b212d03baef92c9, type: 2}
     - {fileID: 11400000, guid: 24bc189ae5ad0394dbfceea09b47b09d, type: 2}
-    layerNumber: 3
+    layerNumber: 5
     curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0.7017822
+        inSlope: 1.6161779
+        outSlope: 1.6161779
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.07906091
+        value: 0.82955873
+        inSlope: 1.2079799
+        outSlope: 1.2079799
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.19227785
+        value: 0.9201076
+        inSlope: 0.4493464
+        outSlope: 0.4493464
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.09891074
+        outSlope: 0.09891074
         tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
