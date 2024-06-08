@@ -77,6 +77,8 @@ namespace MapGeneration
                 
                     hexTile.GetComponent<MeshRenderer>().material = 
                         hex.material;
+
+                    tile.AddComponent<MeshCollider>();
                
                     Vector3 pos = tile.transform.position;
                 
