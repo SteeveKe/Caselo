@@ -48,7 +48,8 @@ namespace Player
         private void Move()
         {
             Vector3 vel = _rigidbody.velocity;
-            Vector3 newVel = new Vector3(_moveDirection.x, 0f, _moveDirection.y) * speed * Time.deltaTime;
+            Vector3 newVel = (transform.forward * _moveDirection.y + transform.right * _moveDirection.x).normalized;
+            newVel *= speed * Time.deltaTime;
             newVel.y = vel.y;
             _rigidbody.velocity = newVel;
         }
