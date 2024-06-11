@@ -255,7 +255,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -589,10 +589,10 @@ MonoBehaviour:
   m_LookAt: {fileID: 1298789401}
   m_Follow: {fileID: 1298789401}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 10
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 500
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -667,8 +667,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 40
+  far clip plane: 500
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -948,8 +948,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1222054408214404331, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222054408214404331, guid: eeea9929184498049a8306f1291ef5df, type: 3}
       propertyPath: m_Constraints
       value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222054408214404331, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1222054408214404331, guid: eeea9929184498049a8306f1291ef5df, type: 3}
       propertyPath: m_CollisionDetection
@@ -957,11 +965,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
       propertyPath: speed
-      value: 3000
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: jumpForce
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
       propertyPath: jumpSpeed
-      value: 200
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: groundDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: jumpCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: playerHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: airMultiplier
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051384060243925525, guid: eeea9929184498049a8306f1291ef5df, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8580286090481663812, guid: eeea9929184498049a8306f1291ef5df, type: 3}
       propertyPath: m_Name

@@ -59,6 +59,7 @@ namespace MapGeneration
             _hexPos = new Transform[_gridSize.x, _gridSize.y];
         
             GameObject newTile = new GameObject($"Hex", typeof(HexTile));
+            newTile.layer = 6;
 
             for (int y = 0; y < _gridSize.y; y++)
             {
