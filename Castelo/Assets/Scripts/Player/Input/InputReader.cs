@@ -9,10 +9,11 @@ namespace PlayerInput
     {
         private PlayerInput _playerInput;
         
-        public event Action<Vector2> moveEvent;
-        
+        public event Action<Vector2> MoveEvent;
         public event Action JumpEvent;
         public event Action JumpCancelledEvent;
+        public event Action SprintEvent;
+        public event Action SprintCancelledEvent;
 
         private void OnEnable()
         {
@@ -37,7 +38,7 @@ namespace PlayerInput
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            moveEvent?.Invoke(context.ReadValue<Vector2>());
+            MoveEvent?.Invoke(context.ReadValue<Vector2>());
         }
 
         public void OnJump(InputAction.CallbackContext context)
@@ -49,6 +50,18 @@ namespace PlayerInput
             if (context.phase == InputActionPhase.Canceled)
             {
                 JumpCancelledEvent?.Invoke();
+            }
+        }
+
+        public void OnSprint(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                SprintEvent?.Invoke();
+            }
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                SprintCancelledEvent?.Invoke();
             }
         }
     }

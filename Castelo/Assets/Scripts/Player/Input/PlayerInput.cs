@@ -46,6 +46,15 @@ namespace PlayerInput
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""922217bb-3350-4978-b5ed-010fa4b2337a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -114,6 +123,17 @@ namespace PlayerInput
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""938c3c4e-a80d-4efa-a653-f08a0ec93291"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -124,6 +144,7 @@ namespace PlayerInput
             m_Mouvement = asset.FindActionMap("Mouvement", throwIfNotFound: true);
             m_Mouvement_Move = m_Mouvement.FindAction("Move", throwIfNotFound: true);
             m_Mouvement_Jump = m_Mouvement.FindAction("Jump", throwIfNotFound: true);
+            m_Mouvement_Sprint = m_Mouvement.FindAction("Sprint", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -187,12 +208,14 @@ namespace PlayerInput
         private List<IMouvementActions> m_MouvementActionsCallbackInterfaces = new List<IMouvementActions>();
         private readonly InputAction m_Mouvement_Move;
         private readonly InputAction m_Mouvement_Jump;
+        private readonly InputAction m_Mouvement_Sprint;
         public struct MouvementActions
         {
             private @PlayerInput m_Wrapper;
             public MouvementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Mouvement_Move;
             public InputAction @Jump => m_Wrapper.m_Mouvement_Jump;
+            public InputAction @Sprint => m_Wrapper.m_Mouvement_Sprint;
             public InputActionMap Get() { return m_Wrapper.m_Mouvement; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -208,6 +231,9 @@ namespace PlayerInput
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
 
             private void UnregisterCallbacks(IMouvementActions instance)
@@ -218,6 +244,9 @@ namespace PlayerInput
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Sprint.started -= instance.OnSprint;
+                @Sprint.performed -= instance.OnSprint;
+                @Sprint.canceled -= instance.OnSprint;
             }
 
             public void RemoveCallbacks(IMouvementActions instance)
@@ -239,6 +268,7 @@ namespace PlayerInput
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnSprint(InputAction.CallbackContext context);
         }
     }
 }
