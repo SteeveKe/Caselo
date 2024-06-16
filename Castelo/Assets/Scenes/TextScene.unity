@@ -372,12 +372,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 17c39bba27fa5394a81abb7824f007ef, type: 3}
       propertyPath: m_Name
-      value: poison_tower_LVL_4_rig
+      value: Nexus
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17c39bba27fa5394a81abb7824f007ef, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1757006767}
     - targetCorrespondingSourceObject: {fileID: -1448570293137731927, guid: 17c39bba27fa5394a81abb7824f007ef, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1752727322}
@@ -469,6 +472,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9253235, y: 15.242887, z: 3.884369}
   m_Center: {x: -0.04058838, y: 7.630317, z: -0.008072138}
+--- !u!1 &1757006765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 17c39bba27fa5394a81abb7824f007ef, type: 3}
+  m_PrefabInstance: {fileID: 961662410}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1757006767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757006765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d41cdbbc6881404fa114844e2ccbd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initLife: 0
+  life: 0
 --- !u!1 &1961532284
 GameObject:
   m_ObjectHideFlags: 0
