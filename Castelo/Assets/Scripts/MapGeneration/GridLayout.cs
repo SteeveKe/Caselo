@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Numerics;
 using ScriptableObject;
-using TreeEditor;
+//using TreeEditor;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace MapGeneration
 {
@@ -11,7 +15,7 @@ namespace MapGeneration
         private MapGeneration _mapGeneration;
         private GenerateMapPattern _generateMapPattern;
         private SmoothHeight _smoothHeight;
-        private Perlin _perlin;
+        private int _perlinOffset;
 
         private Transform _tileHandler;
         private Vector2Int _gridSize;
@@ -34,6 +38,7 @@ namespace MapGeneration
             _outerSize = _mapGeneration.outerSize;
             _innerSize = _mapGeneration.innerSize;
             _isFlatTopped = _mapGeneration.isFlatTopped;
+            _perlinOffset = _mapGeneration.GetRandom.Next(1000);
             
             _generateMapPattern.GeneratePattern();
         
@@ -46,8 +51,6 @@ namespace MapGeneration
             _meshesDictionary.Add(_mapGeneration.borderBiome.hexCaseType.name, 
                 new HexRenderer(_innerSize, _outerSize, _mapGeneration.borderBiome.hexCaseType.height, _isFlatTopped)._mesh);
             
-            _perlin = new Perlin();
-            _perlin.SetSeed(_mapGeneration.mapSeed);
             LayoutGrid();
         }
 
@@ -59,6 +62,7 @@ namespace MapGeneration
             _hexPos = new Transform[_gridSize.x, _gridSize.y];
         
             GameObject newTile = new GameObject($"Hex", typeof(HexTile));
+            newTile.layer = 6;
 
             for (int y = 0; y < _gridSize.y; y++)
             {
@@ -77,6 +81,8 @@ namespace MapGeneration
                 
                     hexTile.GetComponent<MeshRenderer>().material = 
                         hex.material;
+
+                    tile.AddComponent<MeshCollider>();
                
                     Vector3 pos = tile.transform.position;
                 
@@ -119,8 +125,7 @@ namespace MapGeneration
             {
                 float sampleX = x / (float)width * scale * frequency;
                 float sampleY = y / (float)height * scale * frequency;
-
-                float perlinValue = _perlin.Noise(sampleX, sampleY);
+                float perlinValue = Mathf.PerlinNoise(sampleX + _perlinOffset, sampleY + _perlinOffset);
                 noiseHeight += perlinValue * amplitude;
 
                 amplitude *= persistance;
