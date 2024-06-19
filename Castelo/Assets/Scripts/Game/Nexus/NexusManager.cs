@@ -7,32 +7,23 @@ using UnityEngine;
 
 namespace Game.Nexus
 {
-    public class NexusManager : MonoBehaviour
+    public class NexusManager : Building.Building
     {
         public static NexusManager nexusManager;
-        [SerializeField] private float initLife;
-        [SerializeField] private float life;
-        [SerializeField] private List<Collider> enemiesList = new List<Collider>();
 
-        public float distance;
-
-        private void Awake()
+        protected override void Init()
         {
             if (nexusManager != null)
             {
                 Destroy(this);
             }
-        }
-
-        private void Start()
-        {
             nexusManager = this;
-            life = initLife;
+            base.Init();
         }
 
         private void FixedUpdate()
         {
-            FindEnemies();
+            //FindEnemies();
             
             if (life <= 0)
             {
@@ -43,15 +34,6 @@ namespace Game.Nexus
             {
                 TakeDamage(1);
             }
-        }
-
-        public void TakeDamage(float dmg)
-        {
-            life -= dmg;
-            transform.DOComplete();
-            transform.DOShakePosition(0.5f, 0.1f);
-            transform.DOShakeScale(0.5f, 0.1f);
-            transform.DOShakeRotation(0.5f, 10f);
         }
 
         private void FindEnemies()
@@ -67,7 +49,7 @@ namespace Game.Nexus
                 }
                 if (enemy.state == EnemyManager.EnemyState.ChasseNexus)
                 {
-                    if (Mathf.Abs((transform.position - enemy.transform.position).magnitude) < enemy.enemyStat.nexusAttackRange)
+                    if (Mathf.Abs((transform.position - enemy.transform.position).magnitude) < enemy.nexusAttackRange)
                     {
                         enemy.state = EnemyManager.EnemyState.TargetNexus;
                         enemy.NavMeshAgent.isStopped = true;
