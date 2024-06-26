@@ -16,8 +16,6 @@ namespace Enemies
         {
             _enemyManager = GetComponent<EnemyManager>();
             _navMeshAgent = _enemyManager.NavMeshAgent;
-            destination = NexusManager.nexusManager.transform;
-            _navMeshAgent.SetDestination(destination.position);
         }
     }
 }

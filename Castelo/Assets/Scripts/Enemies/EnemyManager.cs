@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game;
 using Game.Nexus;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,7 +15,6 @@ namespace Enemies
         private NavMeshAgent _navMeshAgent;
         public EnemyStat enemyStat;
         public EnemyState state;
-        public List<EnemyFocusType> targetPriority;
 
         private float _maxHealth;
         public float health;
@@ -25,9 +25,20 @@ namespace Enemies
         public float attackRange;
         public float attackRate;
         public float attackDamage;
+        public EnemyTarget enemyTarget;
+        public bool targetPersistance = false;
+
+        public bool TargetPersistance
+        {
+            get => targetPersistance;
+            set => targetPersistance = value;
+        }
 
         [SerializeField]private float _attackColdown = 0;
+        private GameManager _gameManager;
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
+
+        public Transform target;
         
         public enum EnemyState
         {
@@ -35,14 +46,6 @@ namespace Enemies
             TargetNexus,
             TargetPlayer,
             TargetBuilding
-        }
-        
-        public enum EnemyFocusType
-        {
-            Nexus,
-            Building,
-            DefenseTower,
-            Player
         }
         
         void Start()
@@ -57,10 +60,12 @@ namespace Enemies
             attackDamage = enemyStat.attackDamage;
             state = EnemyState.ChasseNexus;
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _gameManager = GameManager.gameManager;
         }
 
         private void FixedUpdate()
         {
+            FindTarget();
             if (state == EnemyState.TargetNexus)
             {
                 if (_attackColdown < 0)
@@ -78,6 +83,16 @@ namespace Enemies
         public void TakeDamage(float damage)
         {
             health -= damage;
+        }
+
+        private void FindTarget()
+        {
+            Transform transform = _gameManager.GetNearestTarget(this, enemyTarget).transform;
+            if (transform != null)
+            {
+                target = transform;
+                _navMeshAgent.destination = target.position;
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using DG.Tweening;
+using Enemies.Target;
 using UnityEngine;
 
 namespace Game.Building
 {
+    [RequireComponent(typeof(EnemyBuildingTarget))]
     public abstract class Building : MonoBehaviour
     {
         public enum BuildingType
@@ -15,7 +17,7 @@ namespace Game.Building
 
         private GameManager _gameManager;
         public BuildingType buildingType;
-        public float initLife;
+        public float initLife = 100;
         [SerializeField]protected float life;
 
         private void Start()
@@ -27,7 +29,7 @@ namespace Game.Building
         {
             _gameManager = GameManager.gameManager;
             life = initLife;
-            _gameManager.AddBuilding(buildingType, this);
+            //_gameManager.AddBuilding(buildingType, this);
         }
 
         protected void DamageAnimation()

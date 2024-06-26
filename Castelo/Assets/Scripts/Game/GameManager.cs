@@ -1,24 +1,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Enemies;
+using Enemies.Target;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 
 namespace Game
 {
     public class GameManager : MonoBehaviour
     {
-        public enum BuildingType
+        public enum EnemyFocusType
         {
-            AnyBuilding,
             Nexus,
-            SimpleBuilding,
-            DefenseTower
+            Building,
+            DefenseTower,
+            Player
         }
         
         public static GameManager gameManager;
-        private Dictionary<BuildingType, List<Building.Building>> _buildingDictionary;
-        [SerializeField] private List<Transform> allPlayer;
+        private Dictionary<EnemyFocusType, List<EnemyTargetable>> _targetDictionary;
 
         private void Start()
         {
@@ -31,18 +33,18 @@ namespace Game
             InitBuildDictionary();
         }
 
-        public void AddBuilding(Building.Building.BuildingType type, Building.Building building)
+        public void AddBuilding(Building.Building.BuildingType type, EnemyTargetable target)
         {
             switch (type)
             {
                 case Building.Building.BuildingType.SimpleBuilding:
-                    AddBuildingDictionary(BuildingType.SimpleBuilding, building);
+                    AddBuildingDictionary(EnemyFocusType.Building, target);
                     break;
                 case Building.Building.BuildingType.DefenseTower:
-                    AddBuildingDictionary(BuildingType.DefenseTower, building);
+                    AddBuildingDictionary(EnemyFocusType.DefenseTower, target);
                     break;
                 case Building.Building.BuildingType.Nexus:
-                    AddBuildingDictionary(BuildingType.Nexus, building);
+                    AddBuildingDictionary(EnemyFocusType.Nexus, target);
                     break;
                 default:
                     Debug.Log("Add building error not maching type");
@@ -50,13 +52,27 @@ namespace Game
             }
         }
 
-        private void AddBuildingDictionary(BuildingType buildingType, Building.Building building)
+        public void AddPlayer(EnemyTargetable target)
         {
-            if (!_buildingDictionary[buildingType].Contains(building) && 
-                !_buildingDictionary[BuildingType.AnyBuilding].Contains(building))
+            if (!_targetDictionary[EnemyFocusType.Player].Contains(target))
             {
-                _buildingDictionary[buildingType].Add(building);
-                _buildingDictionary[BuildingType.AnyBuilding].Add(building);
+                _targetDictionary[EnemyFocusType.Player].Add(target);
+                Debug.Log("1 player");
+            }
+            else
+            {
+                Debug.Log("bugg in add player to dictionary");
+            }
+        }
+
+        private void AddBuildingDictionary(EnemyFocusType buildingType, EnemyTargetable target)
+        {
+            if (!_targetDictionary[buildingType].Contains(target) && 
+                !_targetDictionary[EnemyFocusType.Building].Contains(target))
+            {
+                _targetDictionary[buildingType].Add(target);
+                _targetDictionary[EnemyFocusType.Building].Add(target);
+                Debug.Log("1 building");
             }
             else
             {
@@ -66,11 +82,45 @@ namespace Game
 
         private void InitBuildDictionary()
         {
-            _buildingDictionary = new Dictionary<BuildingType, List<Building.Building>>();
-            _buildingDictionary.Add(BuildingType.AnyBuilding, new List<Building.Building>());
-            _buildingDictionary.Add(BuildingType.Nexus, new List<Building.Building>());
-            _buildingDictionary.Add(BuildingType.SimpleBuilding, new List<Building.Building>());
-            _buildingDictionary.Add(BuildingType.DefenseTower, new List<Building.Building>());
+            _targetDictionary = new Dictionary<EnemyFocusType, List<EnemyTargetable>>();
+            _targetDictionary.Add(EnemyFocusType.Building, new List<EnemyTargetable>());
+            _targetDictionary.Add(EnemyFocusType.Nexus, new List<EnemyTargetable>());
+            _targetDictionary.Add(EnemyFocusType.DefenseTower, new List<EnemyTargetable>());
+            _targetDictionary.Add(EnemyFocusType.Player, new List<EnemyTargetable>());
+        }
+
+        public EnemyTargetable GetNearestTarget(EnemyManager enemy, EnemyTarget targets)
+        { 
+            UnityEngine.Vector3 pos = enemy.transform.position;
+            EnemyTargetable newTarget = null;
+            float nearestDistance = Mathf.Infinity;
+            float distance;
+            bool persistant = false;
+
+            foreach (EnemyTargetValue targetValue in targets.enemyTargetPriority)
+            {
+                foreach (EnemyTargetable target in _targetDictionary[targetValue.enemyFocusType])
+                {
+                    distance = UnityEngine.Vector3.Distance(pos, target.transform.position);
+                    if (targetValue.hasInfiniteRange || distance < targetValue.rangeDetection)
+                    {
+                        if (distance < nearestDistance)
+                        {
+                            nearestDistance = distance;
+                            newTarget = target;
+                            persistant = targetValue.isPersistant;
+                        }
+                    }
+                }
+
+                if (newTarget != null)
+                {
+                    break;
+                }
+            }
+
+            enemy.targetPersistance = persistant;
+            return newTarget;
         }
     }
 }
