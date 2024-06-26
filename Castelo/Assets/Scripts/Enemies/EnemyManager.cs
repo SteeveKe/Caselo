@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemies.Target;
 using Game;
 using Game.Nexus;
 using UnityEngine;
@@ -39,6 +40,7 @@ namespace Enemies
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
 
         public Transform target;
+        public EnemyTargetable enemyTargetable;
         
         public enum EnemyState
         {
@@ -65,13 +67,34 @@ namespace Enemies
 
         private void FixedUpdate()
         {
+            //Debug.Log(_navMeshAgent.pathEndPosition);
             FindTarget();
+            
+            /*
             if (state == EnemyState.TargetNexus)
             {
                 if (_attackColdown < 0)
                 {
                     _attackColdown = attackRate;
                     NexusManager.nexusManager.TakeDamage(attackDamage);
+                }
+                else
+                {
+                    _attackColdown -= Time.deltaTime;
+                }
+            }
+            */
+            float dist = Vector3.Distance(_navMeshAgent.pathEndPosition, transform.position);
+            if (dist < NavMeshAgent.stoppingDistance)
+            {
+                if (_attackColdown <= 0)
+                {
+                    if (enemyTargetable != null)
+                    {
+                        Debug.Log("attack");
+                        _attackColdown = attackRate;
+                        enemyTargetable.TakeDamage(attackDamage);
+                    }
                 }
                 else
                 {
@@ -87,11 +110,13 @@ namespace Enemies
 
         private void FindTarget()
         {
-            Transform transform = _gameManager.GetNearestTarget(this, enemyTarget).transform;
-            if (transform != null)
+            EnemyTargetable target = _gameManager.GetNearestTarget(this, enemyTarget);
+            if (target != null)
             {
-                target = transform;
-                _navMeshAgent.destination = target.position;
+                Transform transform = target.transform;
+                this.target = transform;
+                _navMeshAgent.destination = this.target.position;
+                enemyTargetable = target;
             }
         }
     }

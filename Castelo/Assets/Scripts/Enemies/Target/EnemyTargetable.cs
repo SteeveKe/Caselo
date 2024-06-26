@@ -19,5 +19,7 @@ namespace Enemies.Target
             _transform = transform;
             GameManager = GameManager.gameManager;
         }
+
+        public abstract void TakeDamage(float damage);
     }
 }

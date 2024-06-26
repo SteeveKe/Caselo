@@ -14,5 +14,10 @@ namespace Enemies.Target
             base.Init();
             GameManager.AddBuilding(_building.buildingType, this);
         }
+
+        public override void TakeDamage(float damage)
+        {
+            _building.TakeDamage(damage);
+        }
     }
 }

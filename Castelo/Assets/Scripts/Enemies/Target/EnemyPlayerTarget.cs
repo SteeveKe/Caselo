@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Enemies.Target
 {
     public class EnemyPlayerTarget : EnemyTargetable
@@ -6,6 +8,11 @@ namespace Enemies.Target
         {
             base.Init();
             GameManager.AddPlayer(this);
+        }
+
+        public override void TakeDamage(float damage)
+        {
+            Debug.Log("player ouch");
         }
     }
 }
