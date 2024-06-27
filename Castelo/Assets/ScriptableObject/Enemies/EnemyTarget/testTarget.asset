@@ -16,7 +16,7 @@ MonoBehaviour:
   - enemyFocusType: 3
     hasInfiniteRange: 0
     rangeDetection: 10
-    isPersistant: 1
+    isPersistant: 0
   - enemyFocusType: 2
     hasInfiniteRange: 1
     rangeDetection: 0
@@ -24,8 +24,8 @@ MonoBehaviour:
   - enemyFocusType: 1
     hasInfiniteRange: 1
     rangeDetection: 0
-    isPersistant: 1
+    isPersistant: 0
   - enemyFocusType: 0
     hasInfiniteRange: 1
     rangeDetection: 0
-    isPersistant: 1
+    isPersistant: 0

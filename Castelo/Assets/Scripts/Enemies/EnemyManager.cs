@@ -90,6 +90,10 @@ namespace Enemies
                     _attackColdown -= Time.deltaTime;
                 }
             }
+            else
+            {
+                _attackColdown -= Time.deltaTime;
+            }
         }
 
         public void TakeDamage(float damage)
