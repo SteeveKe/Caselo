@@ -11,7 +11,7 @@ namespace Game.Building
         public float attackRate;
         public EnemyManager target = null;
 
-        private float _attackColdown = 0;
+        protected float _attackColdown = 0;
 
         protected override void Init()
         {
@@ -19,7 +19,7 @@ namespace Game.Building
             base.Init();
         }
 
-        private void FixedUpdate()
+        protected override void TestTarget()
         {
             if (target == null)
             {
@@ -35,7 +35,9 @@ namespace Game.Building
             {
                 _attackColdown -= Time.deltaTime;
             }
+            base.TestTarget();
         }
+
 
         protected void AttackEnemy()
         {

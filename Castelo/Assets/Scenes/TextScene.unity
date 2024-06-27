@@ -964,18 +964,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7998010846491477408, guid: 87131315c3315b946b98d5701d699679, type: 3}
-      propertyPath: enemyTarget
-      value: 
-      objectReference: {fileID: 11400000, guid: 33cf0ffe84ddf4e4fa6222cca05c183f, type: 2}
-    - target: {fileID: 7998010846491477408, guid: 87131315c3315b946b98d5701d699679, type: 3}
-      propertyPath: targetPriority.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7998010846491477408, guid: 87131315c3315b946b98d5701d699679, type: 3}
-      propertyPath: targetPriority.Array.data[0]
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8236398166243603564, guid: 87131315c3315b946b98d5701d699679, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8418763
@@ -1150,8 +1138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingType: 1
-  initLife: 0
-  life: 0
+  initLife: 100
+  life: 100
   attackRange: 0
   attackDamage: 0
   attackRate: 0

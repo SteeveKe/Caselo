@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Enemies.Target;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game.Building
@@ -15,7 +16,8 @@ namespace Game.Building
             DefenseTower
         }
 
-        private GameManager _gameManager;
+        protected EnemyTargetable _enemyTargetable;
+        protected GameManager _gameManager;
         public BuildingType buildingType;
         public float initLife = 100;
         [SerializeField]protected float life;
@@ -25,8 +27,25 @@ namespace Game.Building
             Init();
         }
 
+        private void FixedUpdate()
+        {
+            if (life <= 0)
+            {
+                _gameManager.RemoveBuilding(buildingType, _enemyTargetable);
+                transform.DOComplete();
+                Destroy(gameObject);
+            }
+            TestTarget();
+        }
+
+        protected virtual void TestTarget()
+        {
+            
+        }
+
         protected virtual void Init()
         {
+            _enemyTargetable = GetComponent<EnemyTargetable>();
             _gameManager = GameManager.gameManager;
             life = initLife;
             //_gameManager.AddBuilding(buildingType, this);

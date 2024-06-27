@@ -29,11 +29,6 @@ namespace Game.Nexus
             {
                 Debug.Log("Game Over");
             }
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                TakeDamage(1);
-            }
         }
 
         private void FindEnemies()

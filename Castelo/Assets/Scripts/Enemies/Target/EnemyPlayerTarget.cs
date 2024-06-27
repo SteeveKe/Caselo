@@ -12,7 +12,7 @@ namespace Enemies.Target
 
         public override void TakeDamage(float damage)
         {
-            Debug.Log("player ouch");
+            //Debug.Log("player ouch");
         }
     }
 }

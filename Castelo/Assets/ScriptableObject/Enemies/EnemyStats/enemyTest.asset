@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8203f669fdca04d9ccbd108d926f64, type: 3}
   m_Name: enemyTest
   m_EditorClassIdentifier: 
-  life: 10
+  health: 0
   speed: 2
   acceleration: 8
   nexusAttackRange: 5
+  buildingDetectionRange: 0
   attackRange: 2
   attackRate: 2
-  attackDamage: 1
+  attackDamage: 25

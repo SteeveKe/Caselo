@@ -145,7 +145,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -207,4 +207,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStat: {fileID: 11400000, guid: ddbae0be2616343469838692bf9ed4dd, type: 2}
   state: 0
+  health: 0
+  speed: 0
+  acceleration: 0
+  nexusAttackRange: 0
+  buildingDetectionRange: 0
+  attackRange: 0
+  attackRate: 0
+  attackDamage: 0
+  enemyTarget: {fileID: 11400000, guid: 33cf0ffe84ddf4e4fa6222cca05c183f, type: 2}
+  targetPersistance: 0
   _attackColdown: 0
+  target: {fileID: 0}
+  enemyTargetable: {fileID: 0}

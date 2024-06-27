@@ -38,8 +38,7 @@ namespace Enemies
         [SerializeField]private float _attackColdown = 0;
         private GameManager _gameManager;
         public NavMeshAgent NavMeshAgent => _navMeshAgent;
-
-        public Transform target;
+        
         public EnemyTargetable enemyTargetable;
         
         public enum EnemyState
@@ -63,35 +62,25 @@ namespace Enemies
             state = EnemyState.ChasseNexus;
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _gameManager = GameManager.gameManager;
+            _attackColdown = attackRate;
         }
 
         private void FixedUpdate()
         {
             //Debug.Log(_navMeshAgent.pathEndPosition);
-            FindTarget();
-            
-            /*
-            if (state == EnemyState.TargetNexus)
+            if (!targetPersistance || !enemyTargetable)
             {
-                if (_attackColdown < 0)
-                {
-                    _attackColdown = attackRate;
-                    NexusManager.nexusManager.TakeDamage(attackDamage);
-                }
-                else
-                {
-                    _attackColdown -= Time.deltaTime;
-                }
+                FindTarget();
             }
-            */
+            
             float dist = Vector3.Distance(_navMeshAgent.pathEndPosition, transform.position);
             if (dist < NavMeshAgent.stoppingDistance)
             {
                 if (_attackColdown <= 0)
                 {
-                    if (enemyTargetable != null)
+                    if (enemyTargetable)
                     {
-                        Debug.Log("attack");
+                        //Debug.Log("attack");
                         _attackColdown = attackRate;
                         enemyTargetable.TakeDamage(attackDamage);
                     }
@@ -110,13 +99,11 @@ namespace Enemies
 
         private void FindTarget()
         {
-            EnemyTargetable target = _gameManager.GetNearestTarget(this, enemyTarget);
-            if (target != null)
+            EnemyTargetable nearestTarget = _gameManager.GetNearestTarget(this, enemyTarget);
+            if (nearestTarget && (nearestTarget != enemyTargetable || nearestTarget.GetType() == typeof(EnemyPlayerTarget)))
             {
-                Transform transform = target.transform;
-                this.target = transform;
-                _navMeshAgent.destination = this.target.position;
-                enemyTargetable = target;
+                _navMeshAgent.destination = nearestTarget.transform.position;
+                enemyTargetable = nearestTarget;
             }
         }
     }

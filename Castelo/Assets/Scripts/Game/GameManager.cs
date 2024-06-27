@@ -52,12 +52,30 @@ namespace Game
             }
         }
 
+        public void RemoveBuilding(Building.Building.BuildingType type, EnemyTargetable target)
+        {
+            switch (type)
+            {
+                case Building.Building.BuildingType.SimpleBuilding:
+                    RemoveBuildingDictionary(EnemyFocusType.Building, target);
+                    break;
+                case Building.Building.BuildingType.DefenseTower:
+                    RemoveBuildingDictionary(EnemyFocusType.DefenseTower, target);
+                    break;
+                case Building.Building.BuildingType.Nexus:
+                    RemoveBuildingDictionary(EnemyFocusType.Nexus, target);
+                    break;
+                default:
+                    Debug.Log("remove building error not maching type");
+                    break;
+            }
+        }
+
         public void AddPlayer(EnemyTargetable target)
         {
             if (!_targetDictionary[EnemyFocusType.Player].Contains(target))
             {
                 _targetDictionary[EnemyFocusType.Player].Add(target);
-                Debug.Log("1 player");
             }
             else
             {
@@ -72,11 +90,24 @@ namespace Game
             {
                 _targetDictionary[buildingType].Add(target);
                 _targetDictionary[EnemyFocusType.Building].Add(target);
-                Debug.Log("1 building");
             }
             else
             {
                 Debug.Log("bugg in add building to dictionary");
+            }
+        }
+        
+        private void RemoveBuildingDictionary(EnemyFocusType buildingType, EnemyTargetable target)
+        {
+            if (_targetDictionary[buildingType].Contains(target) && 
+                _targetDictionary[EnemyFocusType.Building].Contains(target))
+            {
+                _targetDictionary[buildingType].Remove(target);
+                _targetDictionary[EnemyFocusType.Building].Remove(target);
+            }
+            else
+            {
+                Debug.Log("bugg in remove building to dictionary");
             }
         }
 

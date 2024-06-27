@@ -10,6 +10,6 @@ namespace Enemies
         public GameManager.EnemyFocusType enemyFocusType;
         public bool hasInfiniteRange;
         public float rangeDetection;
-        public bool isPersistant = true;
+        public bool isPersistant;
     }
 }
