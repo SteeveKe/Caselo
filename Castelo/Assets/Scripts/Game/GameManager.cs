@@ -21,6 +21,7 @@ namespace Game
         
         public static GameManager gameManager;
         private Dictionary<EnemyFocusType, List<EnemyTargetable>> _targetDictionary;
+        private List<EnemyManager> _allEnemies = new List<EnemyManager>();
 
         private void Start()
         {
@@ -152,6 +153,37 @@ namespace Game
 
             enemy.targetPersistance = persistant;
             return newTarget;
+        }
+
+        public void AddEnemy(EnemyManager enemy)
+        {
+            _allEnemies.Add(enemy);
+            Debug.Log("enemy added");
+        }
+
+        public void RemoveEnemy(EnemyManager enemy)
+        {
+            _allEnemies.Remove(enemy);
+            Debug.Log("enemy removed");
+        }
+
+        public EnemyManager FindNearestEnemy(UnityEngine.Vector3 pos)
+        {
+            EnemyManager nearestEnemy = null;
+            float nearestDistance = Mathf.Infinity;
+            float distance;
+            
+            foreach (EnemyManager enemy in _allEnemies)
+            {
+                distance = UnityEngine.Vector3.Distance(pos, enemy.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestEnemy = enemy;
+                }
+            }
+
+            return nearestEnemy;
         }
     }
 }

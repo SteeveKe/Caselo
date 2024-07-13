@@ -21,8 +21,6 @@ namespace Enemies
         public float health;
         public float speed;
         public float acceleration;
-        public float nexusAttackRange;
-        public float buildingDetectionRange;
         public float attackRange;
         public float attackRate;
         public float attackDamage;
@@ -55,19 +53,28 @@ namespace Enemies
             health = _maxHealth;
             speed = enemyStat.speed;
             acceleration = enemyStat.acceleration;
-            nexusAttackRange = enemyStat.nexusAttackRange;
             attackRange = enemyStat.attackRange;
             attackRate = enemyStat.attackRate;
             attackDamage = enemyStat.attackDamage;
+            
             state = EnemyState.ChasseNexus;
+            
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _gameManager = GameManager.gameManager;
             _attackColdown = attackRate;
+            
+            _gameManager.AddEnemy(this);
         }
 
         private void FixedUpdate()
         {
-            //Debug.Log(_navMeshAgent.pathEndPosition);
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            
             if (!targetPersistance || !enemyTargetable)
             {
                 FindTarget();
@@ -80,7 +87,6 @@ namespace Enemies
                 {
                     if (enemyTargetable)
                     {
-                        //Debug.Log("attack");
                         _attackColdown = attackRate;
                         enemyTargetable.TakeDamage(attackDamage);
                     }
@@ -107,8 +113,14 @@ namespace Enemies
             if (nearestTarget && (nearestTarget != enemyTargetable || nearestTarget.GetType() == typeof(EnemyPlayerTarget)))
             {
                 _navMeshAgent.destination = nearestTarget.transform.position;
+                _navMeshAgent.stoppingDistance = nearestTarget.targetRadius + attackRange;
                 enemyTargetable = nearestTarget;
             }
+        }
+
+        private void OnDestroy()
+        {
+            _gameManager.RemoveEnemy(this);
         }
     }
 }

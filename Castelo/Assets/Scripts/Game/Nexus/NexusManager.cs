@@ -31,6 +31,7 @@ namespace Game.Nexus
             }
         }
 
+        /*
         private void FindEnemies()
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, 100f, 1 << 7);
@@ -52,5 +53,6 @@ namespace Game.Nexus
                 }
             }
         } 
+        */
     }
 }

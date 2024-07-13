@@ -135,19 +135,22 @@ namespace Player
             else
             {
                 dirVel = currentVel.magnitude * (transform.forward * _moveDirection.y + transform.right * _moveDirection.x * airSideMultiplier).normalized;
-                _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, _rigidbody.velocity.y, dirVel.z);
+                _rigidbody.velocity = new Vector3(dirVel.x, _rigidbody.velocity.y, dirVel.z);
+                //Debug.Log(dirVel);
             }
             
             float targetSpeed = _moveDirection.normalized.magnitude * speed;
             float accelRate = Mathf.Abs(targetSpeed) > 0.01f ? acceleration : decceleration;
             
-            float speedDif = targetSpeed - currentVel.magnitude;
+            //float speedDif = targetSpeed - currentVel.magnitude;
+            float speedDif = targetSpeed - dirVel.magnitude;
             float movement = speedDif * accelRate;
             
             Vector3 newVel;
             if (_moveDirection.magnitude == 0)
             {
-                newVel = currentVel.normalized;
+                //newVel = currentVel.normalized;
+                newVel = dirVel.normalized;
             }
             else
             {

@@ -8,8 +8,6 @@ using UnityEngine;
         public float health;
         public float speed;
         public float acceleration;
-        public float nexusAttackRange;
-        public float buildingDetectionRange;
         public float attackRange;
         public float attackRate;
         public float attackDamage;

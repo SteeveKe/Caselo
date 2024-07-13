@@ -20,7 +20,7 @@ MonoBehaviour:
   - enemyFocusType: 2
     hasInfiniteRange: 1
     rangeDetection: 0
-    isPersistant: 1
+    isPersistant: 0
   - enemyFocusType: 1
     hasInfiniteRange: 1
     rangeDetection: 0

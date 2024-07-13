@@ -8,6 +8,7 @@ namespace Enemies.Target
     {
         private Transform _transform;
         protected GameManager GameManager;
+        public float targetRadius = 5f;
 
         private void Start()
         {
