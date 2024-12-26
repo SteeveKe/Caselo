@@ -20,7 +20,7 @@ namespace MapGeneration
             _mapGeneration = GetComponent<MapGeneration>();
             _biomeHeights = _mapGeneration.biomeHeights;
             _biomePosition = new Dictionary<Biome, List<Vector2Int>>();
-            _gridLayout = FindObjectOfType<GridLayout>();
+            _gridLayout = FindFirstObjectByType<GridLayout>();
             SetHexMapBiome(_mapGeneration.GenerateMapPattern.GetHexTilePatternBiomes());
             _heightMap = _gridLayout.GetHeightMap();
             
