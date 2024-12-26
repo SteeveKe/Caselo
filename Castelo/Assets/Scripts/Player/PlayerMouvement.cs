@@ -116,7 +116,7 @@ namespace Player
 
         private void Move()
         {
-            Vector3 currentVel = _rigidbody.velocity;
+            Vector3 currentVel = _rigidbody.linearVelocity;
             currentVel.y = 0f;
 
             Vector3 dirVel;
@@ -130,12 +130,12 @@ namespace Player
                 {
                     dirVel = currentVel.magnitude * (transform.forward * _moveDirection.y + transform.right * _moveDirection.x).normalized;
                 }
-                _rigidbody.velocity = new Vector3(dirVel.x, _rigidbody.velocity.y, dirVel.z);
+                _rigidbody.linearVelocity = new Vector3(dirVel.x, _rigidbody.linearVelocity.y, dirVel.z);
             }
             else
             {
                 dirVel = currentVel.magnitude * (transform.forward * _moveDirection.y + transform.right * _moveDirection.x * airSideMultiplier).normalized;
-                _rigidbody.velocity = new Vector3(dirVel.x, _rigidbody.velocity.y, dirVel.z);
+                _rigidbody.linearVelocity = new Vector3(dirVel.x, _rigidbody.linearVelocity.y, dirVel.z);
                 //Debug.Log(dirVel);
             }
             
@@ -187,19 +187,19 @@ namespace Player
 
         private void SpeedControl()
         {
-            Vector3 vel = _rigidbody.velocity;
+            Vector3 vel = _rigidbody.linearVelocity;
             vel.y = 0f;
 
             if (vel.magnitude > speed)
             {
                 vel = vel.normalized * speed;
-                _rigidbody.velocity = new Vector3(vel.x, _rigidbody.velocity.y, vel.z);
+                _rigidbody.linearVelocity = new Vector3(vel.x, _rigidbody.linearVelocity.y, vel.z);
             }
         }
 
         private void Jump()
         {
-            _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0f, _rigidbody.velocity.z);
+            _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0f, _rigidbody.linearVelocity.z);
             
             _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
         }

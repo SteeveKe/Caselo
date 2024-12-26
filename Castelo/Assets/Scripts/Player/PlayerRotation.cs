@@ -1,4 +1,4 @@
-using Cinemachine;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Player
@@ -9,10 +9,10 @@ namespace Player
         
         void Start()
         {
-            _cameraRotation = FindObjectOfType<CinemachineBrain>().gameObject.transform;
+            _cameraRotation = FindFirstObjectByType<CinemachineBrain>().gameObject.transform;
         }
         
-        void Update()
+        void FixedUpdate()
         {
             transform.rotation = Quaternion.Euler(0f, _cameraRotation.eulerAngles.y, 0f);
         }
