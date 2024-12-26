@@ -22,5 +22,11 @@ namespace Enemies.Target
         }
 
         public abstract void TakeDamage(float damage);
+        
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, targetRadius);
+        }
     }
 }

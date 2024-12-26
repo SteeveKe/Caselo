@@ -29,7 +29,7 @@ namespace Game.Building
         protected override void TestTarget()
         {
             SetTarget();
-            if (target == null)
+            if (!target)
             {
                 return;
             }
@@ -62,7 +62,7 @@ namespace Game.Building
 
         protected void SetTarget()
         {
-            if (target != null)
+            if (target)
             {
                 if (Vector3.Distance(target.transform.position, transform.position) < attackRange)
                 {
@@ -84,7 +84,7 @@ namespace Game.Building
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, attackRange);
         }
     }
