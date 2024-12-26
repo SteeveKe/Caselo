@@ -1,29 +1,58 @@
 using System;
+using System.Collections.Generic;
+using DG.Tweening;
+using Enemies;
+using Unity.Loading;
 using UnityEngine;
 
 namespace Game.Nexus
 {
-    public class NexusManager : MonoBehaviour
+    public class NexusManager : Building.Building
     {
-        [SerializeField] private float initLife;
-        [SerializeField] private float life;
+        public static NexusManager nexusManager;
 
-        private void Start()
+        protected override void Init()
         {
-            life = initLife;
+            if (nexusManager != null)
+            {
+                Destroy(this);
+            }
+            nexusManager = this;
+            base.Init();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
+            //FindEnemies();
+            
             if (life <= 0)
             {
                 Debug.Log("Game Over");
             }
         }
 
-        public void TakeDamage(float dmg)
+        /*
+        private void FindEnemies()
         {
-            life -= dmg;
-        }
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 100f, 1 << 7);
+
+            foreach (var col in colliders)
+            {
+                EnemyManager enemy = col.GetComponent<EnemyManager>();
+                if (enemy == null)
+                {
+                    continue;
+                }
+                if (enemy.state == EnemyManager.EnemyState.ChasseNexus)
+                {
+                    if (Mathf.Abs((transform.position - enemy.transform.position).magnitude) < enemy.nexusAttackRange)
+                    {
+                        enemy.state = EnemyManager.EnemyState.TargetNexus;
+                        enemy.NavMeshAgent.isStopped = true;
+                    }
+                }
+            }
+        } 
+        */
     }
 }
